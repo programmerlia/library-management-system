@@ -36,7 +36,6 @@ public class DB {
              Statement statement = con.createStatement()) {
             
             statement.executeUpdate(sql);
-            DB.close(con);
 
         } catch (SQLException e) {
             handleSQLException(e);

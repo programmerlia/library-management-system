@@ -11,6 +11,7 @@ public class frmsignup extends javax.swing.JFrame {
 
     public frmsignup() {
         initComponents();
+        clear();
         setVisible(true);
         setResizable(false);
         this.setLocationRelativeTo(null);
@@ -27,6 +28,7 @@ public class frmsignup extends javax.swing.JFrame {
         fusername = new javax.swing.JTextField();
         jButton7 = new javax.swing.JButton();
         jButton8 = new javax.swing.JButton();
+        jButton9 = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -88,7 +90,21 @@ public class frmsignup extends javax.swing.JFrame {
                 bttnsignupActionPerformed(evt);
             }
         });
-        getContentPane().add(jButton8, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 380, 110, 30));
+        getContentPane().add(jButton8, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 380, 110, 30));
+
+        jButton9.setBackground(java.awt.Color.white);
+        jButton9.setFont(new java.awt.Font("Century Gothic", 1, 14)); // NOI18N
+        jButton9.setForeground(java.awt.Color.white);
+        jButton9.setIcon(new javax.swing.ImageIcon(getClass().getResource("/assets/i-left.png"))); // NOI18N
+        jButton9.setBorder(null);
+        jButton9.setBorderPainted(false);
+        jButton9.setVerifyInputWhenFocusTarget(false);
+        jButton9.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton9bttnsignupActionPerformed(evt);
+            }
+        });
+        getContentPane().add(jButton9, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 380, 30, 30));
 
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/assets/bg-signup.png"))); // NOI18N
         getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(1, 0, -1, 470));
@@ -97,30 +113,38 @@ public class frmsignup extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void bttnclearActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bttnclearActionPerformed
+     clear();
+      
+    }//GEN-LAST:event_bttnclearActionPerformed
+
+    private void jButton9bttnsignupActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton9bttnsignupActionPerformed
+       this.setVisible(false);
+       new frmlogin().setVisible(true);
+    }//GEN-LAST:event_jButton9bttnsignupActionPerformed
+    private void clear(){
       fname.setText(null);
       femail.setText(null);
       fpassword.setText(null);
       fconfirmpassword.setText(null);
       fusername.setText(null);
-      
-    }//GEN-LAST:event_bttnclearActionPerformed
-
+    }
     private void bttnsignupActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bttnsignupActionPerformed
+        if (REUSABLES.checkNotNull(fusername.getText(), fpassword.getText(), fname.getText(), femail.getText(), fconfirmpassword.getText())) {
+            if (fpassword.getText().equals(fconfirmpassword.getText())) {
+                String sqlquery = "INSERT INTO tbl_accounts (username, password, name, email) VALUES ('" + fusername.getText()
+                        + "', '" + fpassword.getText() + "', '" + fname.getText() + "', '" + femail.getText() + "')";
+                DB.executeUpdate(sqlquery);
+                REUSABLES.showNotif("Account Created! Proceeding to Login Form");
+                this.setVisible(false);
+                new frmlogin().setVisible(true);
 
-        if (fpassword.getText().equals(fconfirmpassword.getText())) {
-            String sqlquery = "INSERT INTO tbl_accounts (username, password, name, email) VALUES ('" + fusername.getText() +
-                    "', '" + fpassword.getText() +  "', '" + fname.getText() +  "', '" + femail.getText() +"')";
-            DB.executeUpdate(sqlquery);
-            showMessageDialog(null, "Account Created! Proceeding to Login Form");
-            
-            this.setVisible(false);
-            new frmlogin().setVisible(true);
-            
-       
+            } else {
+                REUSABLES.showNotif("Passwords do not match");
+
+            }
         } else {
-            showMessageDialog(null, "Passwords do not match");
+            REUSABLES.showNotif("Answer All Fields");
         }
-
     }//GEN-LAST:event_bttnsignupActionPerformed
 
     /**
@@ -166,6 +190,7 @@ public class frmsignup extends javax.swing.JFrame {
     private javax.swing.JTextField fusername;
     private javax.swing.JButton jButton7;
     private javax.swing.JButton jButton8;
+    private javax.swing.JButton jButton9;
     private javax.swing.JLabel jLabel1;
     // End of variables declaration//GEN-END:variables
 }

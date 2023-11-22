@@ -7,15 +7,19 @@ package lmsfinal;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.PreparedStatement;
+import java.sql.Connection;
 import javax.swing.JOptionPane;
 
 public class frmlogin extends javax.swing.JFrame {
 
     public frmlogin() {
+            
+        initComponents();
         setVisible(true);
         setResizable(false);
-        initComponents();
         this.setLocationRelativeTo(null);
+        clear();
     }
 
     public static void main(String args[]) {
@@ -128,8 +132,7 @@ public class frmlogin extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void bttnclearActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bttnclearActionPerformed
-        fusername.setText(null);
-        fpassword.setText(null);
+        clear();
 
     }//GEN-LAST:event_bttnclearActionPerformed
 
@@ -138,27 +141,39 @@ public class frmlogin extends javax.swing.JFrame {
         this.setVisible(false);
         new frmsignup().setVisible(true);
     }//GEN-LAST:event_bttnsignupActionPerformed
-
+    
+    private void clear(){
+        fusername.setText(null);
+        fpassword.setText(null);
+    }
     private void bttnloginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bttnloginActionPerformed
         String enteredUsername = fusername.getText();
         String enteredPassword = new String(fpassword.getPassword());
-        
-        String qry = "SELECT * FROM tbl_accounts WHERE username = ? AND password = ? ";
 
-        try (ResultSet rs = DB.executeQuery(qry, enteredUsername, enteredPassword)) {
-            if (rs.next()) {
-                JOptionPane.showMessageDialog(null, "Login successful!");
+        String qry = "SELECT * FROM tbl_accounts WHERE username = ? AND password = ?";
 
-                this.setVisible(false);
-                new frmmain().setVisible(true);
-                GV.MAINUSERNAME = enteredUsername;
-                GV.MAINPASSWORD = enteredPassword;
-            } else {
-                JOptionPane.showMessageDialog(null, "Invalid username or password!");
+        try (Connection con = DB.open(); PreparedStatement preparedStatement = con.prepareStatement(qry)) {
+
+            preparedStatement.setString(1, enteredUsername);
+            preparedStatement.setString(2, enteredPassword);
+
+            try (ResultSet rs = preparedStatement.executeQuery()) {
+                if (rs.next()) {
+                    REUSABLES.showNotif("Login Succesful");
+                    GV.MAINUSERNAME = enteredUsername;
+                    GV.MAINPASSWORD = enteredPassword;
+                    this.setVisible(false);
+                    new frmmain().setVisible(true);
+                    
+                } else {
+                    REUSABLES.showNotif("Invalid username or password!");
+                }
             }
         } catch (SQLException e) {
             e.printStackTrace();
         }
+
+    
     }//GEN-LAST:event_bttnloginActionPerformed
 
     private void fusernameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_fusernameActionPerformed

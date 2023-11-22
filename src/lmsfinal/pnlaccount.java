@@ -1,44 +1,23 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JPanel.java to edit this template
- */
 package lmsfinal;
 import java.sql.ResultSet;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.sql.SQLException;
+import java.sql.Driver;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
-/**
- *
- * @author testing101
- */
+
 public class pnlaccount extends javax.swing.JPanel {
-
+    
+    int choice= 0;
     public pnlaccount() {
         initComponents();
+        pnlchange.setVisible(false);
+        reread();
+        clear();
         
-        try{
-            String qry = "SELECT username, password, email, name FROM tbl_accounts WHERE username = '"
-                    + GV.MAINUSERNAME + "'";
-            ResultSet rs = DB.executeQuery(qry);
-            while (rs.next()) {
-                String username = rs.getString("username");
-                String password = rs.getString("password");
-                String email = rs.getString("email");
-                String name = rs.getString("name");
-
-                System.out.println("Username: " + username);
-                System.out.println("Password: " + password);
-                System.out.println("Email: " + email);
-                System.out.println("Name: " + name);
-
-                // If you want to assign to strings, you can do something like:
-                // String usernameString = username;
-                // String passwordString = password;
-                // String emailString = email;
-                // String nameString = name;
-            }
-        }catch(SQLException e){
-            e.printStackTrace();
-        }
+       
     }
 
     /**
@@ -58,7 +37,12 @@ public class pnlaccount extends javax.swing.JPanel {
         bttnchangepassword = new javax.swing.JButton();
         jLabel20 = new javax.swing.JLabel();
         jLabel21 = new javax.swing.JLabel();
-        jPanel1 = new javax.swing.JPanel();
+        pnlchange = new javax.swing.JPanel();
+        flabel2 = new javax.swing.JLabel();
+        flabel1 = new javax.swing.JLabel();
+        ffield1 = new javax.swing.JTextField();
+        ffield2 = new javax.swing.JTextField();
+        fbuttonchange = new javax.swing.JButton();
         fname = new javax.swing.JLabel();
         fusername = new javax.swing.JLabel();
         fpassword = new javax.swing.JLabel();
@@ -136,6 +120,7 @@ public class pnlaccount extends javax.swing.JPanel {
 
         jLabel20.setFont(new java.awt.Font("Century Gothic", 0, 14)); // NOI18N
         jLabel20.setForeground(java.awt.Color.white);
+        jLabel20.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         jLabel20.setText("Full Name:");
         add(jLabel20);
         jLabel20.setBounds(71, 256, 115, 19);
@@ -146,21 +131,76 @@ public class pnlaccount extends javax.swing.JPanel {
         add(jLabel21);
         jLabel21.setBounds(71, 219, 115, 19);
 
-        jPanel1.setBackground(new java.awt.Color(78, 2, 2));
+        pnlchange.setBackground(new java.awt.Color(78, 2, 2));
 
-        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
-        jPanel1.setLayout(jPanel1Layout);
-        jPanel1Layout.setHorizontalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 640, Short.MAX_VALUE)
+        flabel2.setForeground(java.awt.Color.white);
+        flabel2.setText("ff");
+        flabel2.setToolTipText("");
+
+        flabel1.setForeground(java.awt.Color.white);
+        flabel1.setText("ff");
+
+        ffield1.setBackground(java.awt.Color.white);
+        ffield1.setFont(new java.awt.Font("Century Gothic", 0, 12)); // NOI18N
+        ffield1.setForeground(java.awt.Color.black);
+        ffield1.setText("bb");
+
+        ffield2.setBackground(java.awt.Color.white);
+        ffield2.setFont(new java.awt.Font("Century Gothic", 0, 12)); // NOI18N
+        ffield2.setForeground(java.awt.Color.black);
+        ffield2.setText("bb");
+
+        fbuttonchange.setBackground(new java.awt.Color(165, 36, 34));
+        fbuttonchange.setFont(new java.awt.Font("Century Gothic", 1, 14)); // NOI18N
+        fbuttonchange.setForeground(java.awt.Color.white);
+        fbuttonchange.setText("CHANGE PASSWORD");
+        fbuttonchange.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        fbuttonchange.setBorderPainted(false);
+        fbuttonchange.setVerifyInputWhenFocusTarget(false);
+        fbuttonchange.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                fbuttonchangebttnsignupActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout pnlchangeLayout = new javax.swing.GroupLayout(pnlchange);
+        pnlchange.setLayout(pnlchangeLayout);
+        pnlchangeLayout.setHorizontalGroup(
+            pnlchangeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(pnlchangeLayout.createSequentialGroup()
+                .addGroup(pnlchangeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(pnlchangeLayout.createSequentialGroup()
+                        .addGap(64, 64, 64)
+                        .addGroup(pnlchangeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(flabel1, javax.swing.GroupLayout.DEFAULT_SIZE, 187, Short.MAX_VALUE)
+                            .addComponent(flabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addGap(47, 47, 47)
+                        .addGroup(pnlchangeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(ffield1, javax.swing.GroupLayout.PREFERRED_SIZE, 203, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(ffield2, javax.swing.GroupLayout.PREFERRED_SIZE, 203, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(pnlchangeLayout.createSequentialGroup()
+                        .addGap(205, 205, 205)
+                        .addComponent(fbuttonchange, javax.swing.GroupLayout.PREFERRED_SIZE, 221, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(139, Short.MAX_VALUE))
         );
-        jPanel1Layout.setVerticalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 180, Short.MAX_VALUE)
+        pnlchangeLayout.setVerticalGroup(
+            pnlchangeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlchangeLayout.createSequentialGroup()
+                .addContainerGap(43, Short.MAX_VALUE)
+                .addGroup(pnlchangeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(flabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(ffield1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(pnlchangeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(flabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(ffield2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addComponent(fbuttonchange)
+                .addGap(22, 22, 22))
         );
 
-        add(jPanel1);
-        jPanel1.setBounds(70, 310, 640, 180);
+        add(pnlchange);
+        pnlchange.setBounds(70, 320, 640, 170);
         add(fname);
         fname.setBounds(170, 260, 270, 20);
         add(fusername);
@@ -170,21 +210,114 @@ public class pnlaccount extends javax.swing.JPanel {
         add(femail);
         femail.setBounds(170, 220, 220, 20);
     }// </editor-fold>//GEN-END:initComponents
+    public void reread(){
+     
+        String qry = "SELECT username, password, email, name FROM tbl_accounts WHERE username = ?";
 
+        try (Connection con = DB.open(); PreparedStatement preparedStatement = con.prepareStatement(qry)) {
+
+            preparedStatement.setString(1, GV.MAINUSERNAME);
+
+            try (ResultSet rs = preparedStatement.executeQuery()) {
+                while (rs.next()) {
+                    String username = rs.getString("username");
+                    String password = rs.getString("password");
+                    String email = rs.getString("email");
+                    String name = rs.getString("name");
+
+                    fusername.setText(username);
+                    fpassword.setText(password);
+                    femail.setText(email);
+                    fname.setText(name);
+
+                }
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+    }
     private void bttnchangeusernamebttnsignupActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bttnchangeusernamebttnsignupActionPerformed
-
+        pnlchange.setVisible(true);
+        choice(1);
+          
     }//GEN-LAST:event_bttnchangeusernamebttnsignupActionPerformed
 
     private void bttnchangepasswordbttnsignupActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bttnchangepasswordbttnsignupActionPerformed
-
-      
+       pnlchange.setVisible(true);
+       choice(2);
     }//GEN-LAST:event_bttnchangepasswordbttnsignupActionPerformed
 
+    private void fbuttonchangebttnsignupActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_fbuttonchangebttnsignupActionPerformed
+      if(ffield1.getText() == ffield2.getText()){
+          if (choice == 1) {
+            if (REUSABLES.checkNotNull(ffield1.getText(), ffield2.getText())) {
+                String qry = "UPDATE tbl_accounts SET username = '" + ffield1.getText()
+                        + "' WHERE username = '" + GV.MAINUSERNAME + "'";
+                DB.executeQuery(qry);
+                 REUSABLES.showNotif("Account updated successfully!");
+                 GV.MAINUSERNAME = ffield1.getText();
+                 clear();
+                 pnlchange.setVisible(false);
+                 reread();
+                 
+            }
+            else{
+                REUSABLES.showNotif("Answer all Fields");
+            }
+        }
+     
+        if (choice==2){
+             if (REUSABLES.checkNotNull(ffield1.getText(), ffield2.getText())) {
+                String qry = "UPDATE tbl_accounts SET password = '" + ffield2.getText() + "' WHERE username = '" + GV.MAINUSERNAME + "'";
+                DB.executeQuery(qry);
+                 REUSABLES.showNotif("Account updated successfully!");
+                GV.MAINPASSWORD = ffield1.getText();
+                  clear();
+                 pnlchange.setVisible(false);
+                 reread();
+
+            }
+            else{
+                REUSABLES.showNotif("Answer all Fields");
+            }
+        }
+      }else{
+          REUSABLES.showNotif("INPUT DOES NOT MATCH!");
+      }
+      
+      
+    }//GEN-LAST:event_fbuttonchangebttnsignupActionPerformed
+    
+    private void choice(int choice){
+        if (choice ==1){
+            flabel1.setText("Set new Username: ");
+            flabel2.setText("Confirm new Username: ");
+            fbuttonchange.setText("CHANGE USERNAME");
+        }
+        if (choice==2){
+             fbuttonchange.setText("CHANGE PASSWORD");
+              flabel1.setText("Set new Password: ");
+            flabel2.setText("Confirm new Password: ");
+        }
+    }
+    
+    private void clear(){
+        ffield1.setText(null);
+        ffield2.setText(null);
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton bttnchangepassword;
     private javax.swing.JButton bttnchangeusername;
+    private javax.swing.JButton fbuttonchange;
     private javax.swing.JLabel femail;
+    private javax.swing.JTextField ffield1;
+    private javax.swing.JTextField ffield2;
+    private javax.swing.JLabel flabel1;
+    private javax.swing.JLabel flabel2;
     private javax.swing.JLabel fname;
     private javax.swing.JLabel fpassword;
     private javax.swing.JLabel fusername;
@@ -193,7 +326,7 @@ public class pnlaccount extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel19;
     private javax.swing.JLabel jLabel20;
     private javax.swing.JLabel jLabel21;
-    private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel6;
+    private javax.swing.JPanel pnlchange;
     // End of variables declaration//GEN-END:variables
 }

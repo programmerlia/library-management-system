@@ -18,7 +18,7 @@ public class frmmain extends javax.swing.JFrame {
         initComponents();
         setResizable(false);
         this.setLocationRelativeTo(null);
-        bttnrecords.setBackground(clickedColor);
+        bttnhome.setBackground(clickedColor);
         pnlhome1.setVisible(true);
         pnlaccount1.setVisible(false);
         pnlrecords1.setVisible(false);
@@ -130,7 +130,7 @@ public class frmmain extends javax.swing.JFrame {
             .addGap(0, 2, Short.MAX_VALUE)
         );
 
-        bttnrecords.setBackground(new java.awt.Color(209, 190, 158));
+        bttnrecords.setBackground(new java.awt.Color(237, 231, 217));
         bttnrecords.setFont(new java.awt.Font("Century Gothic", 1, 18)); // NOI18N
         bttnrecords.setForeground(java.awt.Color.black);
         bttnrecords.setIcon(new javax.swing.ImageIcon(getClass().getResource("/assets/i-records.png"))); // NOI18N
@@ -138,13 +138,14 @@ public class frmmain extends javax.swing.JFrame {
         bttnrecords.setToolTipText("");
         bttnrecords.setBorder(new EmptyBorder (0, 20, 0, 0));
         bttnrecords.setIconTextGap(20);
+        bttnrecords.setOpaque(true);
         bttnrecords.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 bttnrecordsMouseClicked(evt);
             }
         });
 
-        bttnaccount.setBackground(new java.awt.Color(209, 190, 158));
+        bttnaccount.setBackground(new java.awt.Color(237, 231, 217));
         bttnaccount.setFont(new java.awt.Font("Century Gothic", 1, 18)); // NOI18N
         bttnaccount.setForeground(java.awt.Color.black);
         bttnaccount.setIcon(new javax.swing.ImageIcon(getClass().getResource("/assets/i-user.png"))); // NOI18N
@@ -152,13 +153,14 @@ public class frmmain extends javax.swing.JFrame {
         bttnaccount.setToolTipText("");
         bttnaccount.setBorder(new EmptyBorder (0, 20, 0, 0));
         bttnaccount.setIconTextGap(20);
+        bttnaccount.setOpaque(true);
         bttnaccount.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 bttnaccountMouseClicked(evt);
             }
         });
 
-        bttnupdate.setBackground(new java.awt.Color(209, 190, 158));
+        bttnupdate.setBackground(new java.awt.Color(237, 231, 217));
         bttnupdate.setFont(new java.awt.Font("Century Gothic", 1, 18)); // NOI18N
         bttnupdate.setForeground(java.awt.Color.black);
         bttnupdate.setIcon(new javax.swing.ImageIcon(getClass().getResource("/assets/i-square-plus.png"))); // NOI18N
@@ -166,6 +168,7 @@ public class frmmain extends javax.swing.JFrame {
         bttnupdate.setToolTipText("");
         bttnupdate.setBorder(new EmptyBorder (0, 20, 0, 0));
         bttnupdate.setIconTextGap(20);
+        bttnupdate.setOpaque(true);
         bttnupdate.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 bttnupdateMouseClicked(evt);
@@ -180,6 +183,7 @@ public class frmmain extends javax.swing.JFrame {
         bttnhome.setToolTipText("");
         bttnhome.setBorder(new EmptyBorder (0, 20, 0, 0));
         bttnhome.setIconTextGap(20);
+        bttnhome.setOpaque(true);
         bttnhome.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 bttnhomeMouseClicked(evt);
@@ -190,6 +194,10 @@ public class frmmain extends javax.swing.JFrame {
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(bttnrecords, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(bttnaccount, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(bttnupdate, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(bttnhome, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel2Layout.createSequentialGroup()
@@ -203,23 +211,19 @@ public class frmmain extends javax.swing.JFrame {
                                 .addGap(30, 30, 30)
                                 .addComponent(jLabel1)))))
                 .addGap(0, 30, Short.MAX_VALUE))
-            .addComponent(bttnrecords, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addComponent(bttnaccount, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addComponent(bttnupdate, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addComponent(bttnhome, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
-                .addGap(84, 84, 84)
-                .addComponent(bttnhome, javax.swing.GroupLayout.PREFERRED_SIZE, 54, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(70, 70, 70)
+                .addComponent(bttnhome, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addComponent(bttnupdate, javax.swing.GroupLayout.PREFERRED_SIZE, 54, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(bttnupdate, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addComponent(bttnrecords, javax.swing.GroupLayout.PREFERRED_SIZE, 54, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(bttnrecords, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(bttnaccount, javax.swing.GroupLayout.PREFERRED_SIZE, 54, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(146, 146, 146)
+                .addComponent(bttnaccount, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(112, 112, 112)
                 .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(6, 6, 6)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -299,7 +303,7 @@ public class frmmain extends javax.swing.JFrame {
         pnlaccount1.setVisible(true);
         pnlrecords1.setVisible(false);
         pnlupdate1.setVisible(false);
-        bttnrecords.setBackground(normalColor);
+        bttnhome.setBackground(normalColor);
         bttnupdate.setBackground(normalColor);
         bttnrecords.setBackground(normalColor);
         bttnaccount.setBackground(clickedColor);
@@ -310,7 +314,7 @@ public class frmmain extends javax.swing.JFrame {
         pnlaccount1.setVisible(false);
         pnlrecords1.setVisible(false);
         pnlupdate1.setVisible(true);
-        bttnrecords.setBackground(normalColor);
+        bttnhome.setBackground(normalColor);
         bttnupdate.setBackground(clickedColor);
         bttnrecords.setBackground(normalColor);
         bttnaccount.setBackground(normalColor);
@@ -327,7 +331,7 @@ public class frmmain extends javax.swing.JFrame {
          */
         try {
             for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Metal".equals(info.getName())) {
+                if ("Nimbus".equals(info.getName())) {
                     javax.swing.UIManager.setLookAndFeel(info.getClassName());
                     break;
                 }

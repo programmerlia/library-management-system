@@ -86,6 +86,10 @@
       <Layout>
         <DimensionLayout dim="0">
           <Group type="103" groupAlignment="0" attributes="0">
+              <Component id="bttnrecords" alignment="1" max="32767" attributes="0"/>
+              <Component id="bttnaccount" alignment="0" max="32767" attributes="0"/>
+              <Component id="bttnupdate" alignment="0" max="32767" attributes="0"/>
+              <Component id="bttnhome" alignment="1" max="32767" attributes="0"/>
               <Group type="102" attributes="0">
                   <Group type="103" groupAlignment="0" attributes="0">
                       <Group type="102" attributes="0">
@@ -105,24 +109,20 @@
                   </Group>
                   <EmptySpace min="0" pref="30" max="32767" attributes="0"/>
               </Group>
-              <Component id="bttnrecords" alignment="1" max="32767" attributes="0"/>
-              <Component id="bttnaccount" alignment="0" max="32767" attributes="0"/>
-              <Component id="bttnupdate" alignment="0" max="32767" attributes="0"/>
-              <Component id="bttnhome" alignment="1" max="32767" attributes="0"/>
           </Group>
         </DimensionLayout>
         <DimensionLayout dim="1">
           <Group type="103" groupAlignment="0" attributes="0">
               <Group type="102" attributes="0">
-                  <EmptySpace min="-2" pref="84" max="-2" attributes="0"/>
-                  <Component id="bttnhome" min="-2" pref="54" max="-2" attributes="0"/>
+                  <EmptySpace min="-2" pref="70" max="-2" attributes="0"/>
+                  <Component id="bttnhome" min="-2" pref="60" max="-2" attributes="0"/>
                   <EmptySpace type="separate" max="-2" attributes="0"/>
-                  <Component id="bttnupdate" min="-2" pref="54" max="-2" attributes="0"/>
+                  <Component id="bttnupdate" min="-2" pref="60" max="-2" attributes="0"/>
                   <EmptySpace type="separate" max="-2" attributes="0"/>
-                  <Component id="bttnrecords" min="-2" pref="54" max="-2" attributes="0"/>
+                  <Component id="bttnrecords" min="-2" pref="60" max="-2" attributes="0"/>
                   <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                  <Component id="bttnaccount" min="-2" pref="54" max="-2" attributes="0"/>
-                  <EmptySpace min="-2" pref="146" max="-2" attributes="0"/>
+                  <Component id="bttnaccount" min="-2" pref="60" max="-2" attributes="0"/>
+                  <EmptySpace min="-2" pref="112" max="-2" attributes="0"/>
                   <Component id="jPanel4" min="-2" max="-2" attributes="0"/>
                   <EmptySpace min="6" pref="6" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="0" attributes="0">
@@ -180,7 +180,7 @@
         <Component class="javax.swing.JLabel" name="bttnrecords">
           <Properties>
             <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-              <Color blue="9e" green="be" red="d1" type="rgb"/>
+              <Color blue="d9" green="e7" red="ed" type="rgb"/>
             </Property>
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
               <Font name="Century Gothic" size="18" style="1"/>
@@ -197,6 +197,7 @@
               <Connection code="new EmptyBorder (0, 20, 0, 0)" type="code"/>
             </Property>
             <Property name="iconTextGap" type="int" value="20"/>
+            <Property name="opaque" type="boolean" value="true"/>
           </Properties>
           <Events>
             <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="bttnrecordsMouseClicked"/>
@@ -205,7 +206,7 @@
         <Component class="javax.swing.JLabel" name="bttnaccount">
           <Properties>
             <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-              <Color blue="9e" green="be" red="d1" type="rgb"/>
+              <Color blue="d9" green="e7" red="ed" type="rgb"/>
             </Property>
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
               <Font name="Century Gothic" size="18" style="1"/>
@@ -222,6 +223,7 @@
               <Connection code="new EmptyBorder (0, 20, 0, 0)" type="code"/>
             </Property>
             <Property name="iconTextGap" type="int" value="20"/>
+            <Property name="opaque" type="boolean" value="true"/>
           </Properties>
           <Events>
             <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="bttnaccountMouseClicked"/>
@@ -230,7 +232,7 @@
         <Component class="javax.swing.JLabel" name="bttnupdate">
           <Properties>
             <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-              <Color blue="9e" green="be" red="d1" type="rgb"/>
+              <Color blue="d9" green="e7" red="ed" type="rgb"/>
             </Property>
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
               <Font name="Century Gothic" size="18" style="1"/>
@@ -247,6 +249,7 @@
               <Connection code="new EmptyBorder (0, 20, 0, 0)" type="code"/>
             </Property>
             <Property name="iconTextGap" type="int" value="20"/>
+            <Property name="opaque" type="boolean" value="true"/>
           </Properties>
           <Events>
             <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="bttnupdateMouseClicked"/>
@@ -272,6 +275,7 @@
               <Connection code="new EmptyBorder (0, 20, 0, 0)" type="code"/>
             </Property>
             <Property name="iconTextGap" type="int" value="20"/>
+            <Property name="opaque" type="boolean" value="true"/>
           </Properties>
           <Events>
             <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="bttnhomeMouseClicked"/>

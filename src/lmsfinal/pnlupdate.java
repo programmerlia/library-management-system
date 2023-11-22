@@ -1,5 +1,22 @@
-
 package lmsfinal;
+import javax.swing.*;
+import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
+import java.io.File;
+import java.io.IOException;
+import java.awt.Image;
+import java.awt.image.BufferedImage;
+import java.io.ByteArrayInputStream;
+import java.util.Date;
+import javax.imageio.ImageIO;
+
 
 public class pnlupdate extends javax.swing.JPanel {
 
@@ -8,17 +25,36 @@ public class pnlupdate extends javax.swing.JPanel {
         setVisible(true);
         initComponents();
     }
+    
+    
+    private static byte[] imageBytes;
+    private BufferedImage image;
+    private JFrame frame;
+    
 
-   
+    public void displayImage() {
+        try {
+            if (imageBytes != null) {
+                ByteArrayInputStream bis = new ByteArrayInputStream(imageBytes);
+                BufferedImage image = ImageIO.read(bis);
+                Image scaledImage = image.getScaledInstance(pcover.getWidth(), pcover.getHeight(), Image.SCALE_SMOOTH);
+                plabel.setIcon(new ImageIcon(scaledImage));
+            } else {
+                
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jDateChooser1 = new com.toedter.calendar.JDateChooser();
         jPanel3 = new javax.swing.JPanel();
         jPanel6 = new javax.swing.JPanel();
-        jTextField1 = new javax.swing.JTextField();
-        jTextField2 = new javax.swing.JTextField();
-        jTextField3 = new javax.swing.JTextField();
+        ftitle = new javax.swing.JTextField();
+        fauthor = new javax.swing.JTextField();
         jPanel7 = new javax.swing.JPanel();
         jCheckBox1 = new javax.swing.JCheckBox();
         jCheckBox2 = new javax.swing.JCheckBox();
@@ -30,8 +66,9 @@ public class pnlupdate extends javax.swing.JPanel {
         jCheckBox8 = new javax.swing.JCheckBox();
         jCheckBox9 = new javax.swing.JCheckBox();
         jCheckBox10 = new javax.swing.JCheckBox();
-        jTextField4 = new javax.swing.JTextField();
-        jPanel8 = new javax.swing.JPanel();
+        fisbn = new javax.swing.JTextField();
+        pcover = new javax.swing.JPanel();
+        plabel = new javax.swing.JLabel();
         jButton6 = new javax.swing.JButton();
         jLabel12 = new javax.swing.JLabel();
         jLabel13 = new javax.swing.JLabel();
@@ -39,8 +76,9 @@ public class pnlupdate extends javax.swing.JPanel {
         jLabel15 = new javax.swing.JLabel();
         jLabel16 = new javax.swing.JLabel();
         jLabel17 = new javax.swing.JLabel();
-        jButton1 = new javax.swing.JButton();
+        bttnupload = new javax.swing.JButton();
         jLabel18 = new javax.swing.JLabel();
+        fdate = new com.toedter.calendar.JDateChooser();
 
         jPanel3.setBackground(new java.awt.Color(55, 2, 2));
         jPanel3.setForeground(java.awt.Color.black);
@@ -63,17 +101,13 @@ public class pnlupdate extends javax.swing.JPanel {
 
         jPanel3.add(jPanel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 70, -1, -1));
 
-        jTextField1.setBackground(java.awt.Color.white);
-        jTextField1.setForeground(java.awt.Color.black);
-        jPanel3.add(jTextField1, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 190, 180, -1));
+        ftitle.setBackground(java.awt.Color.white);
+        ftitle.setForeground(java.awt.Color.black);
+        jPanel3.add(ftitle, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 110, 180, -1));
 
-        jTextField2.setBackground(java.awt.Color.white);
-        jTextField2.setForeground(java.awt.Color.black);
-        jPanel3.add(jTextField2, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 110, 180, -1));
-
-        jTextField3.setBackground(java.awt.Color.white);
-        jTextField3.setForeground(java.awt.Color.black);
-        jPanel3.add(jTextField3, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 150, 180, -1));
+        fauthor.setBackground(java.awt.Color.white);
+        fauthor.setForeground(java.awt.Color.black);
+        jPanel3.add(fauthor, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 150, 180, -1));
 
         jPanel7.setBackground(new java.awt.Color(55, 2, 2));
         jPanel7.setForeground(java.awt.Color.white);
@@ -191,24 +225,24 @@ public class pnlupdate extends javax.swing.JPanel {
 
         jPanel3.add(jPanel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 230, 190, 160));
 
-        jTextField4.setBackground(java.awt.Color.white);
-        jTextField4.setForeground(java.awt.Color.black);
-        jPanel3.add(jTextField4, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 110, 200, -1));
+        fisbn.setBackground(java.awt.Color.white);
+        fisbn.setForeground(java.awt.Color.black);
+        jPanel3.add(fisbn, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 110, 200, -1));
 
-        jPanel8.setBackground(new java.awt.Color(204, 204, 204));
+        pcover.setBackground(new java.awt.Color(204, 204, 204));
 
-        javax.swing.GroupLayout jPanel8Layout = new javax.swing.GroupLayout(jPanel8);
-        jPanel8.setLayout(jPanel8Layout);
-        jPanel8Layout.setHorizontalGroup(
-            jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 200, Short.MAX_VALUE)
+        javax.swing.GroupLayout pcoverLayout = new javax.swing.GroupLayout(pcover);
+        pcover.setLayout(pcoverLayout);
+        pcoverLayout.setHorizontalGroup(
+            pcoverLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(plabel, javax.swing.GroupLayout.DEFAULT_SIZE, 200, Short.MAX_VALUE)
         );
-        jPanel8Layout.setVerticalGroup(
-            jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 190, Short.MAX_VALUE)
+        pcoverLayout.setVerticalGroup(
+            pcoverLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(plabel, javax.swing.GroupLayout.DEFAULT_SIZE, 190, Short.MAX_VALUE)
         );
 
-        jPanel3.add(jPanel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 160, 200, 190));
+        jPanel3.add(pcover, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 160, 200, 190));
 
         jButton6.setBackground(new java.awt.Color(165, 36, 34));
         jButton6.setFont(new java.awt.Font("Century Gothic", 1, 14)); // NOI18N
@@ -254,19 +288,29 @@ public class pnlupdate extends javax.swing.JPanel {
         jLabel17.setText("ISBN");
         jPanel3.add(jLabel17, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 110, 115, -1));
 
-        jButton1.setBackground(new java.awt.Color(55, 2, 2));
-        jButton1.setFont(new java.awt.Font("Century Gothic", 0, 10)); // NOI18N
-        jButton1.setForeground(java.awt.Color.blue);
-        jButton1.setText("Upload File");
-        jButton1.setBorder(null);
-        jButton1.setBorderPainted(false);
-        jButton1.setMargin(new java.awt.Insets(10, 15, 15, 10));
-        jPanel3.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 350, 200, 30));
+        bttnupload.setBackground(new java.awt.Color(55, 2, 2));
+        bttnupload.setFont(new java.awt.Font("Century Gothic", 0, 10)); // NOI18N
+        bttnupload.setForeground(java.awt.Color.blue);
+        bttnupload.setText("Upload File");
+        bttnupload.setBorder(null);
+        bttnupload.setBorderPainted(false);
+        bttnupload.setMargin(new java.awt.Insets(10, 15, 15, 10));
+        bttnupload.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                bttnuploadActionPerformed(evt);
+            }
+        });
+        jPanel3.add(bttnupload, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 350, 200, 30));
 
         jLabel18.setFont(new java.awt.Font("Century Gothic", 0, 14)); // NOI18N
         jLabel18.setForeground(java.awt.Color.white);
         jLabel18.setText("Title");
         jPanel3.add(jLabel18, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 111, 115, -1));
+
+        fdate.setBackground(java.awt.Color.white);
+        fdate.setForeground(java.awt.Color.black);
+        fdate.setName("fdate"); // NOI18N
+        jPanel3.add(fdate, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 190, 180, -1));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -325,12 +369,81 @@ public class pnlupdate extends javax.swing.JPanel {
     }//GEN-LAST:event_jCheckBox10ActionPerformed
 
     private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
-        // TODO add your handling code here:
+       if(REUSABLES.checkNotNull(fisbn.getText(), fauthor.getText(), ftitle.getText(), fdate.getDate())){
+        insertBook(fisbn.getText(), ftitle.getText(), fauthor.getText(), fdate.getDate());
+        }else{
+           REUSABLES.showNotif("Fill all Text/Date Fields");
+    }
+        
     }//GEN-LAST:event_jButton6ActionPerformed
+    private static void insertBook(String isbn, String title, String author, Date date) {
+        String insertQuery = "INSERT INTO tbl_books (isbn, title, author, date, cover) VALUES (?, ?, ?, ?, ?)";
+
+        try (Connection con = DB.open();
+             PreparedStatement preparedStatement = con.prepareStatement(insertQuery)) {
+
+            preparedStatement.setString(1, isbn);
+            preparedStatement.setString(2, title);
+            preparedStatement.setString(3, author);
+            preparedStatement.setDate(4, new java.sql.Date(date.getDate()));
+
+            int rowsAffected = preparedStatement.executeUpdate();
+
+            if (rowsAffected > 0) {
+                REUSABLES.showNotif("Book inserted successfully!");
+            } else {
+                  REUSABLES.showNotif("Failed to insert book.");
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+    
+    private void bttnuploadActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bttnuploadActionPerformed
+        JFileChooser fileChooser = new JFileChooser();
+        int result = fileChooser.showOpenDialog(frame);
+
+        if (result == JFileChooser.APPROVE_OPTION) {
+            File selectedFile = fileChooser.getSelectedFile();
+
+            try (FileInputStream fis = new FileInputStream(selectedFile)) {
+                imageBytes = new byte[(int) selectedFile.length()];
+                fis.read(imageBytes);
+                fis.close();
+                REUSABLES.showNotif("File Uploaded");
+                displayImage();
+
+                ///yoooo insert to dbase the image
+                String insertQuery = "INSERT INTO tbl_books (cover) VALUES (?)";
+                try (Connection con = DB.open(); PreparedStatement preparedStatement = con.prepareStatement(insertQuery)) {
+
+                    preparedStatement.setBytes(1, imageBytes);
+
+                    int rowsAffected = preparedStatement.executeUpdate();
+
+                    if (rowsAffected > 0) {
+                         REUSABLES.showNotif("Image inserted into database.");
+                    } else {
+                          REUSABLES.showNotif("Failed to insert image into the database.");
+                    }
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
+        } catch (IOException e) {
+            e.printStackTrace();
+            // Handle the exception according to your needs
+        }
+        }
+    }//GEN-LAST:event_bttnuploadActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
+    private javax.swing.JButton bttnupload;
+    private javax.swing.JTextField fauthor;
+    private com.toedter.calendar.JDateChooser fdate;
+    private javax.swing.JTextField fisbn;
+    private javax.swing.JTextField ftitle;
     private javax.swing.JButton jButton6;
     private javax.swing.JCheckBox jCheckBox1;
     private javax.swing.JCheckBox jCheckBox10;
@@ -342,6 +455,7 @@ public class pnlupdate extends javax.swing.JPanel {
     private javax.swing.JCheckBox jCheckBox7;
     private javax.swing.JCheckBox jCheckBox8;
     private javax.swing.JCheckBox jCheckBox9;
+    private com.toedter.calendar.JDateChooser jDateChooser1;
     private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel14;
@@ -352,10 +466,7 @@ public class pnlupdate extends javax.swing.JPanel {
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel6;
     private javax.swing.JPanel jPanel7;
-    private javax.swing.JPanel jPanel8;
-    private javax.swing.JTextField jTextField1;
-    private javax.swing.JTextField jTextField2;
-    private javax.swing.JTextField jTextField3;
-    private javax.swing.JTextField jTextField4;
+    private javax.swing.JPanel pcover;
+    private javax.swing.JLabel plabel;
     // End of variables declaration//GEN-END:variables
 }

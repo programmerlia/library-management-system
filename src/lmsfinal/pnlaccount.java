@@ -134,21 +134,17 @@ public class pnlaccount extends javax.swing.JPanel {
         pnlchange.setBackground(new java.awt.Color(78, 2, 2));
 
         flabel2.setForeground(java.awt.Color.white);
-        flabel2.setText("ff");
         flabel2.setToolTipText("");
 
         flabel1.setForeground(java.awt.Color.white);
-        flabel1.setText("ff");
 
         ffield1.setBackground(java.awt.Color.white);
         ffield1.setFont(new java.awt.Font("Century Gothic", 0, 12)); // NOI18N
         ffield1.setForeground(java.awt.Color.black);
-        ffield1.setText("bb");
 
         ffield2.setBackground(java.awt.Color.white);
         ffield2.setFont(new java.awt.Font("Century Gothic", 0, 12)); // NOI18N
         ffield2.setForeground(java.awt.Color.black);
-        ffield2.setText("bb");
 
         fbuttonchange.setBackground(new java.awt.Color(165, 36, 34));
         fbuttonchange.setFont(new java.awt.Font("Century Gothic", 1, 14)); // NOI18N
@@ -201,12 +197,20 @@ public class pnlaccount extends javax.swing.JPanel {
 
         add(pnlchange);
         pnlchange.setBounds(70, 320, 640, 170);
+
+        fname.setForeground(java.awt.Color.white);
         add(fname);
         fname.setBounds(170, 260, 270, 20);
+
+        fusername.setForeground(java.awt.Color.white);
         add(fusername);
         fusername.setBounds(170, 150, 220, 20);
+
+        fpassword.setForeground(java.awt.Color.white);
         add(fpassword);
         fpassword.setBounds(170, 180, 220, 20);
+
+        femail.setForeground(java.awt.Color.white);
         add(femail);
         femail.setBounds(170, 220, 220, 20);
     }// </editor-fold>//GEN-END:initComponents

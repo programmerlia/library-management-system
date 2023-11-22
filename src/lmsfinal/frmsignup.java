@@ -13,6 +13,7 @@ public class frmsignup extends javax.swing.JFrame {
         initComponents();
         setVisible(true);
         setResizable(false);
+        this.setLocationRelativeTo(null);
     }
 
     @SuppressWarnings("unchecked")
@@ -89,7 +90,7 @@ public class frmsignup extends javax.swing.JFrame {
         });
         getContentPane().add(jButton8, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 380, 110, 30));
 
-        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/assets/signupbg.png"))); // NOI18N
+        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/assets/bg-signup.png"))); // NOI18N
         getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(1, 0, -1, 470));
 
         pack();
@@ -109,7 +110,7 @@ public class frmsignup extends javax.swing.JFrame {
         if (fpassword.getText().equals(fconfirmpassword.getText())) {
             String sqlquery = "INSERT INTO tbl_accounts (username, password, name, email) VALUES ('" + fusername.getText() +
                     "', '" + fpassword.getText() +  "', '" + fname.getText() +  "', '" + femail.getText() +"')";
-            DB.execute(sqlquery);
+            DB.executeUpdate(sqlquery);
             showMessageDialog(null, "Account Created! Proceeding to Login Form");
             
             this.setVisible(false);

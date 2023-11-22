@@ -3,6 +3,8 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JPanel.java to edit this template
  */
 package lmsfinal;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 
 /**
  *
@@ -12,6 +14,31 @@ public class pnlaccount extends javax.swing.JPanel {
 
     public pnlaccount() {
         initComponents();
+        
+        try{
+            String qry = "SELECT username, password, email, name FROM tbl_accounts WHERE username = '"
+                    + GV.MAINUSERNAME + "'";
+            ResultSet rs = DB.executeQuery(qry);
+            while (rs.next()) {
+                String username = rs.getString("username");
+                String password = rs.getString("password");
+                String email = rs.getString("email");
+                String name = rs.getString("name");
+
+                System.out.println("Username: " + username);
+                System.out.println("Password: " + password);
+                System.out.println("Email: " + email);
+                System.out.println("Name: " + name);
+
+                // If you want to assign to strings, you can do something like:
+                // String usernameString = username;
+                // String passwordString = password;
+                // String emailString = email;
+                // String nameString = name;
+            }
+        }catch(SQLException e){
+            e.printStackTrace();
+        }
     }
 
     /**
@@ -23,24 +50,150 @@ public class pnlaccount extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jLabel18 = new javax.swing.JLabel();
+        jPanel6 = new javax.swing.JPanel();
+        jLabel16 = new javax.swing.JLabel();
+        jLabel19 = new javax.swing.JLabel();
+        bttnchangeusername = new javax.swing.JButton();
+        bttnchangepassword = new javax.swing.JButton();
+        jLabel20 = new javax.swing.JLabel();
+        jLabel21 = new javax.swing.JLabel();
+        jPanel1 = new javax.swing.JPanel();
+        fname = new javax.swing.JLabel();
+        fusername = new javax.swing.JLabel();
+        fpassword = new javax.swing.JLabel();
+        femail = new javax.swing.JLabel();
+
         setBackground(new java.awt.Color(55, 2, 2));
         setForeground(java.awt.Color.white);
         setMinimumSize(new java.awt.Dimension(790, 520));
         setPreferredSize(new java.awt.Dimension(790, 520));
+        setLayout(null);
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
-        this.setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 790, Short.MAX_VALUE)
+        jLabel18.setFont(new java.awt.Font("Century Gothic", 0, 14)); // NOI18N
+        jLabel18.setForeground(java.awt.Color.white);
+        jLabel18.setText("Password: ");
+        add(jLabel18);
+        jLabel18.setBounds(71, 179, 115, 19);
+
+        jPanel6.setBackground(new java.awt.Color(255, 255, 153));
+
+        javax.swing.GroupLayout jPanel6Layout = new javax.swing.GroupLayout(jPanel6);
+        jPanel6.setLayout(jPanel6Layout);
+        jPanel6Layout.setHorizontalGroup(
+            jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 690, Short.MAX_VALUE)
         );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 525, Short.MAX_VALUE)
+        jPanel6Layout.setVerticalGroup(
+            jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 2, Short.MAX_VALUE)
         );
+
+        add(jPanel6);
+        jPanel6.setBounds(48, 77, 690, 2);
+
+        jLabel16.setFont(new java.awt.Font("Century Gothic", 1, 18)); // NOI18N
+        jLabel16.setForeground(java.awt.Color.white);
+        jLabel16.setText("ACCOUNT DETAILS");
+        add(jLabel16);
+        jLabel16.setBounds(48, 37, 210, 23);
+
+        jLabel19.setFont(new java.awt.Font("Century Gothic", 0, 14)); // NOI18N
+        jLabel19.setForeground(java.awt.Color.white);
+        jLabel19.setText("Username:");
+        add(jLabel19);
+        jLabel19.setBounds(70, 148, 115, 19);
+
+        bttnchangeusername.setBackground(new java.awt.Color(165, 36, 34));
+        bttnchangeusername.setFont(new java.awt.Font("Century Gothic", 1, 14)); // NOI18N
+        bttnchangeusername.setForeground(java.awt.Color.white);
+        bttnchangeusername.setText("CHANGE USERNAME");
+        bttnchangeusername.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        bttnchangeusername.setBorderPainted(false);
+        bttnchangeusername.setVerifyInputWhenFocusTarget(false);
+        bttnchangeusername.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                bttnchangeusernamebttnsignupActionPerformed(evt);
+            }
+        });
+        add(bttnchangeusername);
+        bttnchangeusername.setBounds(550, 140, 154, 25);
+
+        bttnchangepassword.setBackground(new java.awt.Color(165, 36, 34));
+        bttnchangepassword.setFont(new java.awt.Font("Century Gothic", 1, 14)); // NOI18N
+        bttnchangepassword.setForeground(java.awt.Color.white);
+        bttnchangepassword.setText("CHANGE PASSWORD");
+        bttnchangepassword.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        bttnchangepassword.setBorderPainted(false);
+        bttnchangepassword.setVerifyInputWhenFocusTarget(false);
+        bttnchangepassword.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                bttnchangepasswordbttnsignupActionPerformed(evt);
+            }
+        });
+        add(bttnchangepassword);
+        bttnchangepassword.setBounds(550, 180, 154, 25);
+
+        jLabel20.setFont(new java.awt.Font("Century Gothic", 0, 14)); // NOI18N
+        jLabel20.setForeground(java.awt.Color.white);
+        jLabel20.setText("Full Name:");
+        add(jLabel20);
+        jLabel20.setBounds(71, 256, 115, 19);
+
+        jLabel21.setFont(new java.awt.Font("Century Gothic", 0, 14)); // NOI18N
+        jLabel21.setForeground(java.awt.Color.white);
+        jLabel21.setText("Email:");
+        add(jLabel21);
+        jLabel21.setBounds(71, 219, 115, 19);
+
+        jPanel1.setBackground(new java.awt.Color(78, 2, 2));
+
+        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 640, Short.MAX_VALUE)
+        );
+        jPanel1Layout.setVerticalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 180, Short.MAX_VALUE)
+        );
+
+        add(jPanel1);
+        jPanel1.setBounds(70, 310, 640, 180);
+        add(fname);
+        fname.setBounds(170, 260, 270, 20);
+        add(fusername);
+        fusername.setBounds(170, 150, 220, 20);
+        add(fpassword);
+        fpassword.setBounds(170, 180, 220, 20);
+        add(femail);
+        femail.setBounds(170, 220, 220, 20);
     }// </editor-fold>//GEN-END:initComponents
+
+    private void bttnchangeusernamebttnsignupActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bttnchangeusernamebttnsignupActionPerformed
+
+    }//GEN-LAST:event_bttnchangeusernamebttnsignupActionPerformed
+
+    private void bttnchangepasswordbttnsignupActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bttnchangepasswordbttnsignupActionPerformed
+
+      
+    }//GEN-LAST:event_bttnchangepasswordbttnsignupActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton bttnchangepassword;
+    private javax.swing.JButton bttnchangeusername;
+    private javax.swing.JLabel femail;
+    private javax.swing.JLabel fname;
+    private javax.swing.JLabel fpassword;
+    private javax.swing.JLabel fusername;
+    private javax.swing.JLabel jLabel16;
+    private javax.swing.JLabel jLabel18;
+    private javax.swing.JLabel jLabel19;
+    private javax.swing.JLabel jLabel20;
+    private javax.swing.JLabel jLabel21;
+    private javax.swing.JPanel jPanel1;
+    private javax.swing.JPanel jPanel6;
     // End of variables declaration//GEN-END:variables
 }

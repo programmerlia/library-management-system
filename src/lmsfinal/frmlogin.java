@@ -3,25 +3,21 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JPanel.java to edit this template
  */
 package lmsfinal;
-import javax.swing.*;
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.PreparedStatement;
+
+
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import javax.swing.JOptionPane;
-import javax.swing.SwingUtilities;
-
 
 public class frmlogin extends javax.swing.JFrame {
-
 
     public frmlogin() {
         setVisible(true);
         setResizable(false);
         initComponents();
+        this.setLocationRelativeTo(null);
     }
-    
+
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
@@ -53,6 +49,7 @@ public class frmlogin extends javax.swing.JFrame {
             }
         });
     }
+
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -66,7 +63,7 @@ public class frmlogin extends javax.swing.JFrame {
 
         setMinimumSize(new java.awt.Dimension(700, 500));
         setPreferredSize(new java.awt.Dimension(700, 500));
-        setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+        getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         bttnclear.setBackground(new java.awt.Color(165, 36, 34));
         bttnclear.setFont(new java.awt.Font("Century Gothic", 1, 14)); // NOI18N
@@ -80,7 +77,7 @@ public class frmlogin extends javax.swing.JFrame {
                 bttnclearActionPerformed(evt);
             }
         });
-        add(bttnclear, new org.netbeans.lib.awtextra.AbsoluteConstraints(510, 360, 110, 40));
+        getContentPane().add(bttnclear, new org.netbeans.lib.awtextra.AbsoluteConstraints(510, 360, 110, 40));
 
         bttnsignup.setBackground(java.awt.Color.white);
         bttnsignup.setFont(new java.awt.Font("Century Gothic", 1, 8)); // NOI18N
@@ -95,7 +92,7 @@ public class frmlogin extends javax.swing.JFrame {
                 bttnsignupActionPerformed(evt);
             }
         });
-        add(bttnsignup, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 280, 150, 20));
+        getContentPane().add(bttnsignup, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 280, 150, 20));
 
         fusername.setBackground(java.awt.Color.white);
         fusername.setForeground(java.awt.Color.black);
@@ -105,7 +102,7 @@ public class frmlogin extends javax.swing.JFrame {
                 fusernameActionPerformed(evt);
             }
         });
-        add(fusername, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 150, 220, -1));
+        getContentPane().add(fusername, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 150, 220, -1));
 
         bttnlogin.setBackground(new java.awt.Color(165, 36, 34));
         bttnlogin.setFont(new java.awt.Font("Century Gothic", 1, 14)); // NOI18N
@@ -119,21 +116,21 @@ public class frmlogin extends javax.swing.JFrame {
                 bttnloginActionPerformed(evt);
             }
         });
-        add(bttnlogin, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 360, 110, 40));
+        getContentPane().add(bttnlogin, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 360, 110, 40));
 
         fpassword.setBackground(java.awt.Color.white);
         fpassword.setBorder(null);
-        add(fpassword, new org.netbeans.lib.awtextra.AbsoluteConstraints(412, 236, 210, 20));
+        getContentPane().add(fpassword, new org.netbeans.lib.awtextra.AbsoluteConstraints(412, 236, 210, 20));
 
-        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/assets/loginbg.png"))); // NOI18N
+        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/assets/bg-login.png"))); // NOI18N
         jLabel1.setText("jLabel1");
-        add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, -20, -1, -1));
+        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, -20, -1, -1));
     }// </editor-fold>//GEN-END:initComponents
 
     private void bttnclearActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bttnclearActionPerformed
         fusername.setText(null);
         fpassword.setText(null);
-        
+
     }//GEN-LAST:event_bttnclearActionPerformed
 
     private void bttnsignupActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bttnsignupActionPerformed
@@ -143,40 +140,31 @@ public class frmlogin extends javax.swing.JFrame {
     }//GEN-LAST:event_bttnsignupActionPerformed
 
     private void bttnloginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bttnloginActionPerformed
-    String enteredUsername = fusername.getText();
-    String enteredPassword = new String(fpassword.getPassword());
+        String enteredUsername = fusername.getText();
+        String enteredPassword = new String(fpassword.getPassword());
+        
+        String qry = "SELECT * FROM tbl_accounts WHERE username = ? AND password = ? ";
 
-    // Use placeholders in the query for both username and password
-    String qry = "SELECT * FROM tbl_accounts WHERE username = ? AND password = ?";
-
-    try (Connection con = DB.open();
-         PreparedStatement preparedStatement = con.prepareStatement(qry)) {
-
-        preparedStatement.setString(1, enteredUsername);
-        preparedStatement.setString(2, enteredPassword);
-
-        try (ResultSet rs = preparedStatement.executeQuery()) {
+        try (ResultSet rs = DB.executeQuery(qry, enteredUsername, enteredPassword)) {
             if (rs.next()) {
                 JOptionPane.showMessageDialog(null, "Login successful!");
 
                 this.setVisible(false);
                 new frmmain().setVisible(true);
+                GV.MAINUSERNAME = enteredUsername;
+                GV.MAINPASSWORD = enteredPassword;
             } else {
                 JOptionPane.showMessageDialog(null, "Invalid username or password!");
             }
+        } catch (SQLException e) {
+            e.printStackTrace();
         }
-    } catch (SQLException e) {
-        e.printStackTrace();
-        // Handle the exception according to your needs
-    }
-    
     }//GEN-LAST:event_bttnloginActionPerformed
 
     private void fusernameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_fusernameActionPerformed
-        // TODO add your handling code here:
+
     }//GEN-LAST:event_fusernameActionPerformed
-   
-    
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton bttnclear;
@@ -187,5 +175,4 @@ public class frmlogin extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel1;
     // End of variables declaration//GEN-END:variables
 
-   
 }

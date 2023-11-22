@@ -4,6 +4,8 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.sql.ResultSet;
+import java.sql.PreparedStatement;
 
 public class DB {
 
@@ -29,19 +31,34 @@ public class DB {
         }
     }
 
-    public static void execute(String sql) {
+    public static void executeUpdate(String sql) {
         try (Connection con = open();
              Statement statement = con.createStatement()) {
             
-            // Execute the SQL statement with concatenated values
             statement.executeUpdate(sql);
+            DB.close(con);
 
         } catch (SQLException e) {
             handleSQLException(e);
         }
     }
+    
+    public static ResultSet executeQuery(String sql, Object... params) {
+    try (Connection con = open();
+         PreparedStatement preparedStatement = con.prepareStatement(sql)) {
+
+        for (int i = 0; i < params.length; i++) {
+            preparedStatement.setObject(i + 1, params[i]);
+        }
+
+        return preparedStatement.executeQuery();
+    } catch (SQLException e) {
+        handleSQLException(e);
+        return null;
+    }
+}
 
     public static void handleSQLException(SQLException e) {
-        e.printStackTrace(); // Handle the exception according to your needs
+        e.printStackTrace(); 
     }
 }

@@ -370,14 +370,57 @@ public class pnlupdate extends javax.swing.JPanel {
 
     private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
        if(REUSABLES.checkNotNull(fisbn.getText(), fauthor.getText(), ftitle.getText(), fdate.getDate())){
-        insertBook(fisbn.getText(), ftitle.getText(), fauthor.getText(), fdate.getDate());
+           if(REUSABLES.checkNotNull(imageBytes)){
+               insertBookandImage(fisbn.getText(), ftitle.getText(), fauthor.getText(), fdate.getDate(), imageBytes);
+           }else{   
+               insertBook(fisbn.getText(), ftitle.getText(), fauthor.getText(), fdate.getDate());
+           }
         }else{
            REUSABLES.showNotif("Fill all Text/Date Fields");
     }
-        
+       
     }//GEN-LAST:event_jButton6ActionPerformed
-    private static void insertBook(String isbn, String title, String author, Date date) {
+    
+    private void clear(){
+        ftitle.setText(null);
+        fauthor.setText(null);
+        fisbn.setText(null);
+        fdate.setDate(null);
+        plabel.setIcon(null);
+        imageBytes = null;
+        image = null;
+        
+    }
+    
+        private void insertBookandImage(String isbn, String title, String author, Date date, byte[] imageBytes) {
         String insertQuery = "INSERT INTO tbl_books (isbn, title, author, date, cover) VALUES (?, ?, ?, ?, ?)";
+
+        try (Connection con = DB.open();
+             PreparedStatement preparedStatement = con.prepareStatement(insertQuery)) {
+
+            preparedStatement.setString(1, isbn);
+            preparedStatement.setString(2, title);
+            preparedStatement.setString(3, author);
+            preparedStatement.setDate(4, new java.sql.Date(date.getDate()));
+            preparedStatement.setBytes(5, imageBytes);
+
+            int rowsAffected = preparedStatement.executeUpdate();
+
+            if (rowsAffected > 0) {
+                REUSABLES.showNotif("Book inserted successfully!");
+                clear();
+                
+            } else {
+                  REUSABLES.showNotif("Failed to insert book.");
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+    
+    private void insertBook(String isbn, String title, String author, Date date) {
+        String insertQuery = "INSERT INTO tbl_books (isbn, title, author, date) VALUES (?, ?, ?, ?)";
 
         try (Connection con = DB.open();
              PreparedStatement preparedStatement = con.prepareStatement(insertQuery)) {
@@ -391,6 +434,7 @@ public class pnlupdate extends javax.swing.JPanel {
 
             if (rowsAffected > 0) {
                 REUSABLES.showNotif("Book inserted successfully!");
+                clear();
             } else {
                   REUSABLES.showNotif("Failed to insert book.");
             }
@@ -400,22 +444,8 @@ public class pnlupdate extends javax.swing.JPanel {
         }
     }
     
-    private void bttnuploadActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bttnuploadActionPerformed
-        JFileChooser fileChooser = new JFileChooser();
-        int result = fileChooser.showOpenDialog(frame);
-
-        if (result == JFileChooser.APPROVE_OPTION) {
-            File selectedFile = fileChooser.getSelectedFile();
-
-            try (FileInputStream fis = new FileInputStream(selectedFile)) {
-                imageBytes = new byte[(int) selectedFile.length()];
-                fis.read(imageBytes);
-                fis.close();
-                REUSABLES.showNotif("File Uploaded");
-                displayImage();
-
-                ///yoooo insert to dbase the image
-                String insertQuery = "INSERT INTO tbl_books (cover) VALUES (?)";
+    private void uploadCoverToSql(){
+          String insertQuery = "INSERT INTO tbl_books (cover) VALUES (?)    ";
                 try (Connection con = DB.open(); PreparedStatement preparedStatement = con.prepareStatement(insertQuery)) {
 
                     preparedStatement.setBytes(1, imageBytes);
@@ -430,6 +460,22 @@ public class pnlupdate extends javax.swing.JPanel {
                 } catch (SQLException e) {
                     e.printStackTrace();
                 }
+       
+    }
+    private void bttnuploadActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bttnuploadActionPerformed
+        JFileChooser fileChooser = new JFileChooser();
+        int result = fileChooser.showOpenDialog(frame);
+
+        if (result == JFileChooser.APPROVE_OPTION) {
+            File selectedFile = fileChooser.getSelectedFile();
+
+            try (FileInputStream fis = new FileInputStream(selectedFile)) {
+                imageBytes = new byte[(int) selectedFile.length()];
+                fis.read(imageBytes);
+                fis.close();
+                REUSABLES.showNotif("File Uploaded");
+                displayImage();
+
         } catch (IOException e) {
             e.printStackTrace();
             // Handle the exception according to your needs

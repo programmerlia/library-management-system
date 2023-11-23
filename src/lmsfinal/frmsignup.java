@@ -1,10 +1,12 @@
 package lmsfinal;
 
+import com.formdev.flatlaf.FlatLightLaf;
 import java.sql.SQLException;
 import java.sql.Connection;
 import javax.swing.JOptionPane;
 import static javax.swing.JOptionPane.showMessageDialog;
 import javax.swing.SwingUtilities;
+import javax.swing.UIManager;
 
 
 public class frmsignup extends javax.swing.JFrame {
@@ -129,57 +131,43 @@ public class frmsignup extends javax.swing.JFrame {
       fusername.setText(null);
     }
     private void bttnsignupActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bttnsignupActionPerformed
-        if (REUSABLES.checkNotNull(fusername.getText(), fpassword.getText(), fname.getText(), femail.getText(), fconfirmpassword.getText())) {
-            if (fpassword.getText().equals(fconfirmpassword.getText())) {
-                String sqlquery = "INSERT INTO tbl_accounts (username, password, name, email) VALUES ('" + fusername.getText()
-                        + "', '" + fpassword.getText() + "', '" + fname.getText() + "', '" + femail.getText() + "')";
-                DB.executeUpdate(sqlquery);
-                REUSABLES.showNotif("Account Created! Proceeding to Login Form");
-                this.setVisible(false);
-                new frmlogin().setVisible(true);
-
+        try {
+            if (REUSABLES.checkNotNull(fusername.getText(), fpassword.getText(), fname.getText(), femail.getText(), fconfirmpassword.getText())) {
+                if (fpassword.getText().equals(fconfirmpassword.getText())) {
+                    String sqlquery = "INSERT INTO tbl_accounts (username, password, name, email) VALUES ('" + fusername.getText()
+                            + "', '" + fpassword.getText() + "', '" + fname.getText() + "', '" + femail.getText() + "')";
+                    DB.executeQuery(sqlquery);
+                    REUSABLES.showNotif("Account Created! Proceeding to Login Form");
+                    this.setVisible(false);
+                    clear();   
+                    
+                    new frmlogin().setVisible(true);
+                } else {
+                    REUSABLES.showNotif("Passwords do not match");
+                }
             } else {
-                REUSABLES.showNotif("Passwords do not match");
-
+                REUSABLES.showNotif("Answer All Fields");
             }
-        } else {
-            REUSABLES.showNotif("Answer All Fields");
+        } catch (Exception e) {
+            e.printStackTrace();
+            REUSABLES.showNotif("An error occurred. Please try again later.");
         }
     }//GEN-LAST:event_bttnsignupActionPerformed
-
+   
     /**
      * @param args the command line arguments
      */
     public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(frmsignup.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(frmsignup.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(frmsignup.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(frmsignup.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
-
-        /* Create and display the form */
+                 try {
+    UIManager.setLookAndFeel( new FlatLightLaf() );
+    } catch( Exception ex ) {
+    System.err.println( "Failed to initialize LaF" );
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
                 new frmsignup().setVisible(true);
             }
         });
+    }
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

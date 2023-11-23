@@ -1,4 +1,5 @@
 package lmsfinal;
+import com.formdev.flatlaf.FlatLightLaf;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -73,10 +74,10 @@ public class frmmain extends javax.swing.JFrame {
         bttnupdate = new javax.swing.JLabel();
         bttnhome = new javax.swing.JLabel();
         pnlmain = new javax.swing.JPanel();
+        pnlupdate1 = new lmsfinal.pnlupdate();
+        pnlhome1 = new lmsfinal.pnlhome();
         pnlaccount1 = new lmsfinal.pnlaccount();
         pnlrecords1 = new lmsfinal.pnlrecords();
-        pnlhome1 = new lmsfinal.pnlhome();
-        pnlupdate1 = new lmsfinal.pnlupdate();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setSize(new java.awt.Dimension(10000, 630));
@@ -238,38 +239,14 @@ public class frmmain extends javax.swing.JFrame {
 
         pnlmain.setPreferredSize(new java.awt.Dimension(790, 520));
         pnlmain.setLayout(null);
-
-        javax.swing.GroupLayout pnlaccount1Layout = new javax.swing.GroupLayout(pnlaccount1);
-        pnlaccount1.setLayout(pnlaccount1Layout);
-        pnlaccount1Layout.setHorizontalGroup(
-            pnlaccount1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 806, Short.MAX_VALUE)
-        );
-        pnlaccount1Layout.setVerticalGroup(
-            pnlaccount1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 537, Short.MAX_VALUE)
-        );
-
-        pnlmain.add(pnlaccount1);
-        pnlaccount1.setBounds(0, 0, 806, 537);
-
-        javax.swing.GroupLayout pnlrecords1Layout = new javax.swing.GroupLayout(pnlrecords1);
-        pnlrecords1.setLayout(pnlrecords1Layout);
-        pnlrecords1Layout.setHorizontalGroup(
-            pnlrecords1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 790, Short.MAX_VALUE)
-        );
-        pnlrecords1Layout.setVerticalGroup(
-            pnlrecords1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 520, Short.MAX_VALUE)
-        );
-
-        pnlmain.add(pnlrecords1);
-        pnlrecords1.setBounds(0, 0, 790, 520);
-        pnlmain.add(pnlhome1);
-        pnlhome1.setBounds(0, 0, 790, 520);
         pnlmain.add(pnlupdate1);
         pnlupdate1.setBounds(0, 0, 790, 520);
+        pnlmain.add(pnlhome1);
+        pnlhome1.setBounds(0, 0, 790, 520);
+        pnlmain.add(pnlaccount1);
+        pnlaccount1.setBounds(0, 0, 790, 520);
+        pnlmain.add(pnlrecords1);
+        pnlrecords1.setBounds(0, 0, 790, 520);
 
         getContentPane().add(pnlmain, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 110, 790, 520));
 
@@ -324,31 +301,10 @@ public class frmmain extends javax.swing.JFrame {
      * @param args the command line arguments
      */
     public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(frmmain.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(frmmain.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(frmmain.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(frmmain.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
+         try {
+    UIManager.setLookAndFeel( new FlatLightLaf() );
+    } catch( Exception ex ) {
+    System.err.println( "Failed to initialize LaF" );}
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {

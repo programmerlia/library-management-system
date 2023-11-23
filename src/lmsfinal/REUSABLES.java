@@ -27,8 +27,8 @@ public class REUSABLES {
         JLabel label = new JLabel(message, SwingConstants.LEFT);
         label.setBorder(BorderFactory.createEmptyBorder(0, 10, 0, 0)); 
         label.setFont(new Font("Century Gothic", Font.BOLD, 16));
-        label.setForeground(Color.WHITE);
-        label.setBackground(Color.BLACK);
+        label.setForeground(Color.BLACK);
+        label.setBackground(Color.WHITE);
         f.add(label, BorderLayout.WEST);
         f.setVisible(true);
         Timer timer = new Timer(2000, new ActionListener() {

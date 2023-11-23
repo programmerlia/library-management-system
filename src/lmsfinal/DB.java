@@ -20,6 +20,8 @@ public class DB {
     public static Connection open() throws SQLException {
         return DriverManager.getConnection(JDBC_URL, USER, PASSWORD);
     }
+    
+    
 
     public static void close(Connection connection) {
         try {
@@ -50,11 +52,21 @@ public class DB {
             preparedStatement.setObject(i + 1, params[i]);
         }
 
-        return preparedStatement.executeQuery();
-    } catch (SQLException e) {
-        handleSQLException(e);
-        return null;
-    }
+                return preparedStatement.executeQuery();
+            } catch (SQLException e) {
+                handleSQLException(e);
+                return null;
+            }
+        }
+    
+       public static ResultSet executeQuery(String sql) {
+        try (Connection con = open();
+             PreparedStatement preparedStatement = con.prepareStatement(sql)) {
+            return preparedStatement.executeQuery();
+        } catch (SQLException e) {
+            handleSQLException(e);
+            return null;
+        }
 }
 
     public static void handleSQLException(SQLException e) {

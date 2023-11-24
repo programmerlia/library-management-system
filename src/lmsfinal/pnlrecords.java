@@ -27,6 +27,7 @@ public class pnlrecords extends javax.swing.JPanel {
         initComponents();
         fetchDataAndDisplay();
         jTable2.setModel(tableModel);
+        bttncheckout.setEnabled(false);
     }
     private DefaultTableModel  tableModel = new DefaultTableModel(new String[]{"Cover", "ISBN", "Title", "Author", "Genre", "Genre List", "Publish Date"}, 0);;
   
@@ -82,11 +83,15 @@ public class pnlrecords extends javax.swing.JPanel {
             }
         ));
         jTable2.setRowMargin(4);
-        jTable2.setRowSelectionAllowed(true);
         jTable2.setSelectionBackground(new java.awt.Color(248, 135, 62));
         jTable2.setSelectionMode(javax.swing.ListSelectionModel.MULTIPLE_INTERVAL_SELECTION);
         jTable2.setShowHorizontalLines(true);
         jTable2.setVerifyInputWhenFocusTarget(false);
+        jTable2.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseReleased(java.awt.event.MouseEvent evt) {
+                jTable2MouseReleased(evt);
+            }
+        });
         jScrollPane2.setViewportView(jTable2);
 
         add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 70, 750, -1));
@@ -128,7 +133,8 @@ public class pnlrecords extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void bttncheckoutActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bttncheckoutActionPerformed
-
+        this.setVisible(false);
+        new frmcheckout().setVisible(true);
     }//GEN-LAST:event_bttncheckoutActionPerformed
 
     private void jTextField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField1ActionPerformed
@@ -150,6 +156,12 @@ public class pnlrecords extends javax.swing.JPanel {
         clearTable();
         fetchDataAndDisplay();
     }//GEN-LAST:event_bttnrefreshActionPerformed
+
+    private void jTable2MouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable2MouseReleased
+        if (!jTable2.getSelectionModel().isSelectionEmpty()){
+            bttncheckout.setEnabled(true);
+        }
+    }//GEN-LAST:event_jTable2MouseReleased
 
     private void fetchDataAndDisplay() {
         String sql = "SELECT isbn, title, author, genre, genrelist, publishdate, cover FROM tbl_books";
@@ -182,7 +194,7 @@ public class pnlrecords extends javax.swing.JPanel {
 } 
     
     private void setTableModification(){
-          jTable2.getColumnModel().getColumn(0).setCellRenderer(new ImageRenderer());
+        jTable2.getColumnModel().getColumn(0).setCellRenderer(new ImageRenderer());
         jTable2.setRowHeight(120);
         jTable2.getColumnModel().getColumn(0).setPreferredWidth(70);
         jTable2.setDefaultEditor(Object.class, null);

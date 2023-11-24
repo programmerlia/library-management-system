@@ -66,7 +66,6 @@ public class frmlogin extends javax.swing.JFrame {
         });
         getContentPane().add(bttnclear, new org.netbeans.lib.awtextra.AbsoluteConstraints(510, 360, 110, 40));
 
-        bttnsignup.setBackground(java.awt.Color.white);
         bttnsignup.setFont(new java.awt.Font("Century Gothic", 1, 8)); // NOI18N
         bttnsignup.setForeground(new java.awt.Color(0, 0, 153));
         bttnsignup.setText("Click here to Create Account");
@@ -81,8 +80,6 @@ public class frmlogin extends javax.swing.JFrame {
         });
         getContentPane().add(bttnsignup, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 280, 150, 20));
 
-        fusername.setBackground(java.awt.Color.white);
-        fusername.setForeground(java.awt.Color.black);
         fusername.setBorder(null);
         fusername.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -105,7 +102,6 @@ public class frmlogin extends javax.swing.JFrame {
         });
         getContentPane().add(bttnlogin, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 360, 110, 40));
 
-        fpassword.setBackground(java.awt.Color.white);
         fpassword.setBorder(null);
         getContentPane().add(fpassword, new org.netbeans.lib.awtextra.AbsoluteConstraints(412, 236, 210, 20));
 

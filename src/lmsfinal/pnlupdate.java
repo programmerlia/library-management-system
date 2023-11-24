@@ -4,15 +4,19 @@ import java.io.FileInputStream;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
-import java.io.File;
-import java.io.IOException;
 import java.awt.Image;
 import java.awt.image.BufferedImage;
 import java.io.ByteArrayInputStream;
 import java.util.Date;
 import javax.imageio.ImageIO;
 import javax.swing.filechooser.FileNameExtensionFilter;
-
+import java.io.File;
+import java.io.IOException;
+import java.net.URL;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.StandardCopyOption;
+import java.text.SimpleDateFormat;
 
 public class pnlupdate extends javax.swing.JPanel {
 
@@ -220,13 +224,13 @@ public class pnlupdate extends javax.swing.JPanel {
 
         c1.setFont(new java.awt.Font("Century Gothic", 0, 12)); // NOI18N
         c1.setForeground(java.awt.Color.white);
-        c1.setText("Biography");
+        c1.setText("Life Stories");
         c1.setContentAreaFilled(false);
         pnonfiction.add(c1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 10, -1, -1));
 
         c2.setFont(new java.awt.Font("Century Gothic", 0, 12)); // NOI18N
         c2.setForeground(java.awt.Color.white);
-        c2.setText("Memoir");
+        c2.setText("Technology");
         c2.setContentAreaFilled(false);
         pnonfiction.add(c2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 40, -1, -1));
 
@@ -358,7 +362,6 @@ public class pnlupdate extends javax.swing.JPanel {
 
         fdate.setBackground(java.awt.Color.white);
         fdate.setForeground(java.awt.Color.black);
-        fdate.setDateFormatString("y m d");
         fdate.setMinSelectableDate(new java.util.Date(-62135794704000L));
         fdate.setName("fdate"); // NOI18N
         jPanel3.add(fdate);
@@ -435,15 +438,19 @@ public class pnlupdate extends javax.swing.JPanel {
 
     private void bttnsaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bttnsaveActionPerformed
        if(REUSABLES.checkNotNull(fisbn.getText(), fauthor.getText(), ftitle.getText(), fdate.getDate())){
+           SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MMM-dd");
+        String dateString = dateFormat.format(fdate.getDate());
            if(REUSABLES.checkNotNull(imageBytes)){
-               insertBookandImage(fisbn.getText(), ftitle.getText(), fauthor.getText(), fdate.getDate(), imageBytes);
+               insertBookandImage(fisbn.getText(), ftitle.getText(), fauthor.getText(), dateString, imageBytes);
            }else{   
-               insertBook(fisbn.getText(), ftitle.getText(), fauthor.getText(), fdate.getDate());
+               insertBook(fisbn.getText(), ftitle.getText(), fauthor.getText(), dateString);
            }
         }else{
            REUSABLES.showNotif("Fill all Text/Date Fields");
     }
        
+        clear();pfiction.setVisible(false);
+        pnonfiction.setVisible(false);
     }//GEN-LAST:event_bttnsaveActionPerformed
     
     private void clear(){
@@ -459,7 +466,7 @@ public class pnlupdate extends javax.swing.JPanel {
         
     }
     
-        private void insertBookandImage(String isbn, String title, String author, Date date, byte[] imageBytes) {
+        private void insertBookandImage(String isbn, String title, String author, String date, byte[] imageBytes) {
         String insertQuery = "INSERT INTO tbl_books (isbn, title, author, publishdate, cover, genre, genrelist) VALUES (?, ?, ?, ?, ?, ?, ?)";
 
         try (Connection con = DB.open();
@@ -468,7 +475,7 @@ public class pnlupdate extends javax.swing.JPanel {
             preparedStatement.setString(1, isbn);
             preparedStatement.setString(2, title);
             preparedStatement.setString(3, author);
-            preparedStatement.setDate(4, new java.sql.Date(date.getDate()));
+            preparedStatement.setString(4, date);
             preparedStatement.setBytes(5, imageBytes);
             preparedStatement.setString(6, genre);
             preparedStatement.setString(7, getGenreList());
@@ -488,7 +495,7 @@ public class pnlupdate extends javax.swing.JPanel {
         }
     }
     
-    private void insertBook(String isbn, String title, String author, Date date) {
+    private void insertBook(String isbn, String title, String author, String date) {
         String insertQuery = "INSERT INTO tbl_books (isbn, title, author, publishdate, genre, genrelist, cover) VALUES (?, ?, ?, ?, ?, ?, ?)";
 
         try (Connection con = DB.open(); PreparedStatement preparedStatement = con.prepareStatement(insertQuery)) {
@@ -496,19 +503,24 @@ public class pnlupdate extends javax.swing.JPanel {
             preparedStatement.setString(1, isbn);
             preparedStatement.setString(2, title);
             preparedStatement.setString(3, author);
-            preparedStatement.setDate(4, new java.sql.Date(date.getDate()));
+            preparedStatement.setString(4,date);
             preparedStatement.setString(5, genre);
             preparedStatement.setString(6, getGenreList());
+               Path imagePath = Path.of("downloaded_image.jpg");
+            if (!Files.exists(imagePath)) {
+                downloadImage("https://i.pinimg.com/originals/89/2c/df/892cdfd68cea36c49171f48ae6aa93f3.jpg", imagePath);
+            }
 
-            ClassLoader classLoader = getClass().getClassLoader();
-            File defaultImageFile = new File(classLoader.getResource("assets/no.png").getFile());
-
-            try (FileInputStream defaultFis = new FileInputStream(defaultImageFile)) {
-                imageBytes = new byte[(int) defaultImageFile.length()];
-                defaultFis.read(imageBytes);
+            // Read the image bytes from the file
+            byte[] imageBytes;
+            try (FileInputStream fis = new FileInputStream(imagePath.toFile())) {
+                imageBytes = new byte[(int) imagePath.toFile().length()];
+                fis.read(imageBytes);
             } catch (IOException e) {
                 e.printStackTrace();
+                return;
             }
+
 
             preparedStatement.setBytes(7, imageBytes);
             int rowsAffected = preparedStatement.executeUpdate();
@@ -525,6 +537,15 @@ public class pnlupdate extends javax.swing.JPanel {
         }
     }
     
+    private void downloadImage(String imageUrl, Path outputPath) {
+        try {
+            URL url = new URL(imageUrl);
+            Files.copy(url.openStream(), outputPath, StandardCopyOption.REPLACE_EXISTING);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
 
     private void jfictionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jfictionActionPerformed
        jnonfiction.setSelected(false);
@@ -588,10 +609,10 @@ public class pnlupdate extends javax.swing.JPanel {
     private String getGenreList() {
         StringBuilder cgenreList = new StringBuilder();
         if (c1.isSelected()) {
-            cgenreList.append("Biography, ");
+            cgenreList.append("Life Stories, ");
         }
         if (c2.isSelected()) {
-            cgenreList.append("Memoir, ");
+            cgenreList.append("Technology, ");
         }
         if (c3.isSelected()) {
             cgenreList.append("Politics and Law, ");

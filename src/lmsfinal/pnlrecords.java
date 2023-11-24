@@ -164,7 +164,7 @@ public class pnlrecords extends javax.swing.JPanel {
                 String author = resultSet.getString("author");
                 String genre = resultSet.getString("genre");
                 String genreList = resultSet.getString("genrelist");
-                Date publishDate = resultSet.getDate("publishdate");
+                String publishDate = resultSet.getString("publishdate");
                 java.sql.Blob blob = resultSet.getBlob("cover");
                 byte[] imageData = blob.getBytes(1, (int) blob.length());
                 ImageIcon imageIcon = new ImageIcon(imageData);
@@ -212,7 +212,7 @@ public class pnlrecords extends javax.swing.JPanel {
                 String author = resultSet.getString("author");
                 String genre = resultSet.getString("genre");
                 String genreList = resultSet.getString("genrelist");
-                Date publishDate = resultSet.getDate("publishdate");
+                String publishDate = resultSet.getString("publishdate");
 
                 java.sql.Blob blob = resultSet.getBlob("cover");
                 byte[] imageData = blob.getBytes(1, (int) blob.length());

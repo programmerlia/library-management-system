@@ -89,6 +89,9 @@ public class pnlrecords extends javax.swing.JPanel {
         jTable2.setShowHorizontalLines(true);
         jTable2.setVerifyInputWhenFocusTarget(false);
         jTable2.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jTable2MouseClicked(evt);
+            }
             public void mouseReleased(java.awt.event.MouseEvent evt) {
                 jTable2MouseReleased(evt);
             }
@@ -134,7 +137,8 @@ public class pnlrecords extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void bttncheckoutActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bttncheckoutActionPerformed
-       
+        REUSABLES.strngBook=String.valueOf(jTable2.getValueAt(jTable2.getSelectedRow(), 2));
+        REUSABLES.strngIsbn=String.valueOf(jTable2.getValueAt(jTable2.getSelectedRow(), 1));
         new frmcheckout().setVisible(true);
     }//GEN-LAST:event_bttncheckoutActionPerformed
 
@@ -162,7 +166,13 @@ public class pnlrecords extends javax.swing.JPanel {
         if (!jTable2.getSelectionModel().isSelectionEmpty()){
             bttncheckout.setEnabled(true);
         }
+        
+        
     }//GEN-LAST:event_jTable2MouseReleased
+
+    private void jTable2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable2MouseClicked
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTable2MouseClicked
 
     private void fetchDataAndDisplay() {
         String sql = "SELECT isbn, title, author, genre, genrelist, publishdate, cover FROM tbl_books";
@@ -185,6 +195,7 @@ public class pnlrecords extends javax.swing.JPanel {
             }
               jTable2.setModel(tableModel);
               setTableModification();
+              
     } catch (SQLException e) {
         e.printStackTrace();
     }
@@ -202,6 +213,7 @@ public class pnlrecords extends javax.swing.JPanel {
         jTable2.setCellSelectionEnabled(false);
         jTable2.setColumnSelectionAllowed(false);
         jTable2.setRowSelectionAllowed(true);
+        //jTable2.setSelectionMode(ListSelectionModel.MULTIPLE_INTERVAL_SELECTION);
         for (int i = 1; i < jTable2.getColumnCount(); i++) {
             jTable2.getColumnModel().getColumn(i).setCellRenderer(new WrapTextRenderer());
         }
@@ -243,6 +255,10 @@ public class pnlrecords extends javax.swing.JPanel {
 public class WrapTextRenderer extends DefaultTableCellRenderer {
     @Override
     public Component getTableCellRendererComponent(JTable table, Object value, boolean isSelected, boolean hasFocus, int row, int column) {
+        if (isSelected==true){
+            this.setBackground(new java.awt.Color(248, 135, 62));
+        }
+        
         JLabel label = (JLabel) super.getTableCellRendererComponent(table, value, isSelected, hasFocus, row, column);
         label.setHorizontalAlignment(SwingConstants.LEFT);
         label.setVerticalAlignment(SwingConstants.TOP);
@@ -254,6 +270,7 @@ public class WrapTextRenderer extends DefaultTableCellRenderer {
  private class ImageRenderer extends DefaultTableCellRenderer {
     @Override
     public Component getTableCellRendererComponent(JTable table, Object value, boolean isSelected, boolean hasFocus, int row, int column) {
+        
         if (value instanceof ImageIcon) {
             ImageIcon originalIcon = (ImageIcon) value;
 

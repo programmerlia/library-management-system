@@ -7,6 +7,10 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 public class REUSABLES {
+    
+    public static String strngBook="";
+    public static String strngIsbn="";
+    
       public static boolean checkNotNull(Object... objects) {
         for (Object obj : objects) {
             if (obj == null) {

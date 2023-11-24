@@ -6,10 +6,13 @@ package lmsfinal;
 
 import com.formdev.flatlaf.FlatLightLaf;
 import java.awt.Color;
-import java.util.GregorianCalendar;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.ZoneId;
 import java.util.Calendar;
 import javax.swing.UIManager;
 import javax.swing.UnsupportedLookAndFeelException;
+import java.time.temporal.ChronoUnit;
 
 /**
  *
@@ -22,6 +25,19 @@ public class frmcheckout extends javax.swing.JFrame{
         
         setVisible(false);
         initComponents();
+        lblTitle.setText(REUSABLES.strngBook);
+        lblIsbn.setText(REUSABLES.strngIsbn);
+        
+        lblRecTitle.setVisible(false);
+        lblRecIsbn.setVisible(false);
+        lblRecQuant.setVisible(false);
+        lblRecBorName.setVisible(false);
+        lblDayHand.setVisible(false);
+        lblDayOver.setVisible(false);
+        lblServFee.setVisible(false);
+        lblBookFee.setVisible(false);
+        lblOverFee.setVisible(false);
+        lblTotalFee.setVisible(false);
     }
 
     /**
@@ -37,26 +53,26 @@ public class frmcheckout extends javax.swing.JFrame{
         jLabel1 = new javax.swing.JLabel();
         jPanel6 = new javax.swing.JPanel();
         jLabel18 = new javax.swing.JLabel();
-        jLabel19 = new javax.swing.JLabel();
+        lblIsbn = new javax.swing.JLabel();
         jLabel20 = new javax.swing.JLabel();
         jLabel21 = new javax.swing.JLabel();
         jLabel22 = new javax.swing.JLabel();
         jLabel23 = new javax.swing.JLabel();
         jLabel24 = new javax.swing.JLabel();
-        jLabel25 = new javax.swing.JLabel();
+        lblTotalFee = new javax.swing.JLabel();
         jLabel26 = new javax.swing.JLabel();
-        jComboBox1 = new javax.swing.JComboBox<>();
-        jTextField1 = new javax.swing.JTextField();
+        cmbQuant = new javax.swing.JComboBox<>();
+        txtBorName = new javax.swing.JTextField();
         jDateChooser1 = new com.toedter.calendar.JDateChooser();
         jDateChooser2 = new com.toedter.calendar.JDateChooser();
         jDateChooser3 = new com.toedter.calendar.JDateChooser();
         jButton1 = new javax.swing.JButton();
-        jLabel27 = new javax.swing.JLabel();
+        lblTitle = new javax.swing.JLabel();
         jLabel28 = new javax.swing.JLabel();
         jLabel29 = new javax.swing.JLabel();
         jLabel30 = new javax.swing.JLabel();
         jLabel31 = new javax.swing.JLabel();
-        jLabel32 = new javax.swing.JLabel();
+        lblRecTitle = new javax.swing.JLabel();
         jLabel33 = new javax.swing.JLabel();
         jLabel34 = new javax.swing.JLabel();
         jLabel35 = new javax.swing.JLabel();
@@ -66,14 +82,14 @@ public class frmcheckout extends javax.swing.JFrame{
         jLabel39 = new javax.swing.JLabel();
         jLabel40 = new javax.swing.JLabel();
         jSeparator1 = new javax.swing.JSeparator();
-        jLabel41 = new javax.swing.JLabel();
-        jLabel42 = new javax.swing.JLabel();
-        jLabel43 = new javax.swing.JLabel();
-        jLabel44 = new javax.swing.JLabel();
-        jLabel45 = new javax.swing.JLabel();
-        jLabel46 = new javax.swing.JLabel();
-        jLabel47 = new javax.swing.JLabel();
-        jLabel48 = new javax.swing.JLabel();
+        lblRecIsbn = new javax.swing.JLabel();
+        lblRecQuant = new javax.swing.JLabel();
+        lblRecBorName = new javax.swing.JLabel();
+        lblDayHand = new javax.swing.JLabel();
+        lblDayOver = new javax.swing.JLabel();
+        lblServFee = new javax.swing.JLabel();
+        lblBookFee = new javax.swing.JLabel();
+        lblOverFee = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -109,10 +125,10 @@ public class frmcheckout extends javax.swing.JFrame{
         jLabel18.setText("Quantity:");
         jPanel1.add(jLabel18, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 180, 140, -1));
 
-        jLabel19.setFont(new java.awt.Font("Century Gothic", 0, 14)); // NOI18N
-        jLabel19.setForeground(java.awt.Color.white);
-        jLabel19.setText("isbn string");
-        jPanel1.add(jLabel19, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 150, 110, -1));
+        lblIsbn.setFont(new java.awt.Font("Century Gothic", 0, 14)); // NOI18N
+        lblIsbn.setForeground(java.awt.Color.white);
+        lblIsbn.setText("isbn string");
+        jPanel1.add(lblIsbn, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 150, 110, -1));
 
         jLabel20.setFont(new java.awt.Font("Century Gothic", 0, 14)); // NOI18N
         jLabel20.setForeground(java.awt.Color.white);
@@ -139,10 +155,10 @@ public class frmcheckout extends javax.swing.JFrame{
         jLabel24.setText("Date Due:");
         jPanel1.add(jLabel24, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 280, 140, -1));
 
-        jLabel25.setFont(new java.awt.Font("Century Gothic", 1, 14)); // NOI18N
-        jLabel25.setForeground(new java.awt.Color(51, 51, 51));
-        jLabel25.setText("TOTAL");
-        jPanel1.add(jLabel25, new org.netbeans.lib.awtextra.AbsoluteConstraints(550, 360, 110, -1));
+        lblTotalFee.setFont(new java.awt.Font("Century Gothic", 1, 14)); // NOI18N
+        lblTotalFee.setForeground(new java.awt.Color(51, 51, 51));
+        lblTotalFee.setText("TOTAL");
+        jPanel1.add(lblTotalFee, new org.netbeans.lib.awtextra.AbsoluteConstraints(550, 360, 110, -1));
 
         jLabel26.setFont(new java.awt.Font("Century Gothic", 1, 18)); // NOI18N
         jLabel26.setForeground(new java.awt.Color(51, 51, 51));
@@ -151,15 +167,15 @@ public class frmcheckout extends javax.swing.JFrame{
         jLabel26.setToolTipText("");
         jPanel1.add(jLabel26, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 90, 110, -1));
 
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "1", "2", "3", "4" }));
-        jPanel1.add(jComboBox1, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 180, -1, -1));
+        cmbQuant.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "1", "2", "3", "4" }));
+        jPanel1.add(cmbQuant, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 180, -1, -1));
 
-        jTextField1.addActionListener(new java.awt.event.ActionListener() {
+        txtBorName.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField1ActionPerformed(evt);
+                txtBorNameActionPerformed(evt);
             }
         });
-        jPanel1.add(jTextField1, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 210, -1, -1));
+        jPanel1.add(txtBorName, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 210, 120, -1));
 
         jDateChooser1.setFocusable(false);
         jPanel1.add(jDateChooser1, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 280, 150, -1));
@@ -167,12 +183,17 @@ public class frmcheckout extends javax.swing.JFrame{
         jPanel1.add(jDateChooser3, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 250, 150, -1));
 
         jButton1.setText("Generate Receipt");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
         jPanel1.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 370, -1, -1));
 
-        jLabel27.setFont(new java.awt.Font("Century Gothic", 0, 14)); // NOI18N
-        jLabel27.setForeground(java.awt.Color.white);
-        jLabel27.setText("book string");
-        jPanel1.add(jLabel27, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 120, 110, -1));
+        lblTitle.setFont(new java.awt.Font("Century Gothic", 0, 14)); // NOI18N
+        lblTitle.setForeground(java.awt.Color.white);
+        lblTitle.setText("book string");
+        jPanel1.add(lblTitle, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 120, 110, -1));
 
         jLabel28.setFont(new java.awt.Font("Century Gothic", 0, 14)); // NOI18N
         jLabel28.setForeground(java.awt.Color.white);
@@ -194,10 +215,10 @@ public class frmcheckout extends javax.swing.JFrame{
         jLabel31.setText("Book:");
         jPanel1.add(jLabel31, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 120, 50, -1));
 
-        jLabel32.setFont(new java.awt.Font("Century Gothic", 0, 14)); // NOI18N
-        jLabel32.setForeground(new java.awt.Color(51, 51, 51));
-        jLabel32.setText("book string");
-        jPanel1.add(jLabel32, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 120, 110, -1));
+        lblRecTitle.setFont(new java.awt.Font("Century Gothic", 0, 14)); // NOI18N
+        lblRecTitle.setForeground(new java.awt.Color(51, 51, 51));
+        lblRecTitle.setText("book");
+        jPanel1.add(lblRecTitle, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 120, 110, -1));
 
         jLabel33.setFont(new java.awt.Font("Century Gothic", 1, 14)); // NOI18N
         jLabel33.setForeground(new java.awt.Color(51, 51, 51));
@@ -242,45 +263,45 @@ public class frmcheckout extends javax.swing.JFrame{
         jSeparator1.setForeground(new java.awt.Color(51, 51, 51));
         jPanel1.add(jSeparator1, new org.netbeans.lib.awtextra.AbsoluteConstraints(540, 360, 100, 10));
 
-        jLabel41.setFont(new java.awt.Font("Century Gothic", 0, 14)); // NOI18N
-        jLabel41.setForeground(new java.awt.Color(51, 51, 51));
-        jLabel41.setText("isbn string");
-        jPanel1.add(jLabel41, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 140, 110, -1));
+        lblRecIsbn.setFont(new java.awt.Font("Century Gothic", 0, 14)); // NOI18N
+        lblRecIsbn.setForeground(new java.awt.Color(51, 51, 51));
+        lblRecIsbn.setText("isbn");
+        jPanel1.add(lblRecIsbn, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 140, 110, -1));
 
-        jLabel42.setFont(new java.awt.Font("Century Gothic", 0, 14)); // NOI18N
-        jLabel42.setForeground(new java.awt.Color(51, 51, 51));
-        jLabel42.setText("1");
-        jPanel1.add(jLabel42, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 170, 110, -1));
+        lblRecQuant.setFont(new java.awt.Font("Century Gothic", 0, 14)); // NOI18N
+        lblRecQuant.setForeground(new java.awt.Color(51, 51, 51));
+        lblRecQuant.setText("1");
+        jPanel1.add(lblRecQuant, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 170, 110, -1));
 
-        jLabel43.setFont(new java.awt.Font("Century Gothic", 0, 14)); // NOI18N
-        jLabel43.setForeground(new java.awt.Color(51, 51, 51));
-        jLabel43.setText("hell yea");
-        jPanel1.add(jLabel43, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 190, 110, -1));
+        lblRecBorName.setFont(new java.awt.Font("Century Gothic", 0, 14)); // NOI18N
+        lblRecBorName.setForeground(new java.awt.Color(51, 51, 51));
+        lblRecBorName.setText("hell yea");
+        jPanel1.add(lblRecBorName, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 190, 110, -1));
 
-        jLabel44.setFont(new java.awt.Font("Century Gothic", 0, 14)); // NOI18N
-        jLabel44.setForeground(new java.awt.Color(51, 51, 51));
-        jLabel44.setText("date");
-        jPanel1.add(jLabel44, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 220, 110, -1));
+        lblDayHand.setFont(new java.awt.Font("Century Gothic", 0, 14)); // NOI18N
+        lblDayHand.setForeground(new java.awt.Color(51, 51, 51));
+        lblDayHand.setText("date");
+        jPanel1.add(lblDayHand, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 220, 110, -1));
 
-        jLabel45.setFont(new java.awt.Font("Century Gothic", 0, 14)); // NOI18N
-        jLabel45.setForeground(new java.awt.Color(51, 51, 51));
-        jLabel45.setText("date");
-        jPanel1.add(jLabel45, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 250, 110, -1));
+        lblDayOver.setFont(new java.awt.Font("Century Gothic", 0, 14)); // NOI18N
+        lblDayOver.setForeground(new java.awt.Color(51, 51, 51));
+        lblDayOver.setText("date");
+        jPanel1.add(lblDayOver, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 250, 110, -1));
 
-        jLabel46.setFont(new java.awt.Font("Century Gothic", 0, 14)); // NOI18N
-        jLabel46.setForeground(new java.awt.Color(51, 51, 51));
-        jLabel46.setText("P0");
-        jPanel1.add(jLabel46, new org.netbeans.lib.awtextra.AbsoluteConstraints(550, 300, 110, -1));
+        lblServFee.setFont(new java.awt.Font("Century Gothic", 0, 14)); // NOI18N
+        lblServFee.setForeground(new java.awt.Color(51, 51, 51));
+        lblServFee.setText("P0");
+        jPanel1.add(lblServFee, new org.netbeans.lib.awtextra.AbsoluteConstraints(550, 300, 110, -1));
 
-        jLabel47.setFont(new java.awt.Font("Century Gothic", 0, 14)); // NOI18N
-        jLabel47.setForeground(new java.awt.Color(51, 51, 51));
-        jLabel47.setText("P0");
-        jPanel1.add(jLabel47, new org.netbeans.lib.awtextra.AbsoluteConstraints(550, 320, 110, -1));
+        lblBookFee.setFont(new java.awt.Font("Century Gothic", 0, 14)); // NOI18N
+        lblBookFee.setForeground(new java.awt.Color(51, 51, 51));
+        lblBookFee.setText("P0");
+        jPanel1.add(lblBookFee, new org.netbeans.lib.awtextra.AbsoluteConstraints(550, 320, 110, -1));
 
-        jLabel48.setFont(new java.awt.Font("Century Gothic", 0, 14)); // NOI18N
-        jLabel48.setForeground(new java.awt.Color(51, 51, 51));
-        jLabel48.setText("P0");
-        jPanel1.add(jLabel48, new org.netbeans.lib.awtextra.AbsoluteConstraints(550, 340, 110, -1));
+        lblOverFee.setFont(new java.awt.Font("Century Gothic", 0, 14)); // NOI18N
+        lblOverFee.setForeground(new java.awt.Color(51, 51, 51));
+        lblOverFee.setText("P0");
+        jPanel1.add(lblOverFee, new org.netbeans.lib.awtextra.AbsoluteConstraints(550, 340, 110, -1));
 
         jLabel3.setForeground(new java.awt.Color(51, 51, 51));
         jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/assets/receipt1.png"))); // NOI18N
@@ -300,9 +321,28 @@ public class frmcheckout extends javax.swing.JFrame{
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jTextField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField1ActionPerformed
+    private void txtBorNameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtBorNameActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField1ActionPerformed
+    }//GEN-LAST:event_txtBorNameActionPerformed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        lblRecTitle.setVisible(true);
+        lblRecIsbn.setVisible(true);
+        lblRecQuant.setVisible(true);
+        lblRecBorName.setVisible(true);
+        lblDayHand.setVisible(true);
+        lblDayOver.setVisible(true);
+        lblServFee.setVisible(true);
+        lblBookFee.setVisible(true);
+        lblOverFee.setVisible(true);
+        lblTotalFee.setVisible(true);
+        
+        lblRecTitle.setText(lblTitle.getText());
+        lblRecIsbn.setText(lblIsbn.getText());
+        lblRecQuant.setText(String.valueOf(cmbQuant.getSelectedItem()));
+        lblRecBorName.setText(txtBorName.getText());
+                
+    }//GEN-LAST:event_jButton1ActionPerformed
     
     /**
      * @param args the command line arguments
@@ -321,28 +361,24 @@ public class frmcheckout extends javax.swing.JFrame{
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JComboBox<String> cmbQuant;
     private javax.swing.JButton jButton1;
-    private javax.swing.JComboBox<String> jComboBox1;
     private com.toedter.calendar.JDateChooser jDateChooser1;
     private com.toedter.calendar.JDateChooser jDateChooser2;
     private com.toedter.calendar.JDateChooser jDateChooser3;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel18;
-    private javax.swing.JLabel jLabel19;
     private javax.swing.JLabel jLabel20;
     private javax.swing.JLabel jLabel21;
     private javax.swing.JLabel jLabel22;
     private javax.swing.JLabel jLabel23;
     private javax.swing.JLabel jLabel24;
-    private javax.swing.JLabel jLabel25;
     private javax.swing.JLabel jLabel26;
-    private javax.swing.JLabel jLabel27;
     private javax.swing.JLabel jLabel28;
     private javax.swing.JLabel jLabel29;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel30;
     private javax.swing.JLabel jLabel31;
-    private javax.swing.JLabel jLabel32;
     private javax.swing.JLabel jLabel33;
     private javax.swing.JLabel jLabel34;
     private javax.swing.JLabel jLabel35;
@@ -351,17 +387,21 @@ public class frmcheckout extends javax.swing.JFrame{
     private javax.swing.JLabel jLabel38;
     private javax.swing.JLabel jLabel39;
     private javax.swing.JLabel jLabel40;
-    private javax.swing.JLabel jLabel41;
-    private javax.swing.JLabel jLabel42;
-    private javax.swing.JLabel jLabel43;
-    private javax.swing.JLabel jLabel44;
-    private javax.swing.JLabel jLabel45;
-    private javax.swing.JLabel jLabel46;
-    private javax.swing.JLabel jLabel47;
-    private javax.swing.JLabel jLabel48;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel6;
     private javax.swing.JSeparator jSeparator1;
-    private javax.swing.JTextField jTextField1;
+    private javax.swing.JLabel lblBookFee;
+    private javax.swing.JLabel lblDayHand;
+    private javax.swing.JLabel lblDayOver;
+    private javax.swing.JLabel lblIsbn;
+    private javax.swing.JLabel lblOverFee;
+    private javax.swing.JLabel lblRecBorName;
+    private javax.swing.JLabel lblRecIsbn;
+    private javax.swing.JLabel lblRecQuant;
+    private javax.swing.JLabel lblRecTitle;
+    private javax.swing.JLabel lblServFee;
+    private javax.swing.JLabel lblTitle;
+    private javax.swing.JLabel lblTotalFee;
+    private javax.swing.JTextField txtBorName;
     // End of variables declaration//GEN-END:variables
 }

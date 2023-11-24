@@ -133,6 +133,7 @@ public class frmmain extends javax.swing.JFrame {
 
         bttnrecords.setBackground(new java.awt.Color(237, 231, 217));
         bttnrecords.setFont(new java.awt.Font("Century Gothic", 1, 18)); // NOI18N
+        bttnrecords.setForeground(java.awt.Color.black);
         bttnrecords.setIcon(new javax.swing.ImageIcon(getClass().getResource("/assets/i-records.png"))); // NOI18N
         bttnrecords.setText("RECORDS");
         bttnrecords.setToolTipText("");
@@ -147,6 +148,7 @@ public class frmmain extends javax.swing.JFrame {
 
         bttnaccount.setBackground(new java.awt.Color(237, 231, 217));
         bttnaccount.setFont(new java.awt.Font("Century Gothic", 1, 18)); // NOI18N
+        bttnaccount.setForeground(java.awt.Color.black);
         bttnaccount.setIcon(new javax.swing.ImageIcon(getClass().getResource("/assets/i-user.png"))); // NOI18N
         bttnaccount.setText("ACCOUNT");
         bttnaccount.setToolTipText("");
@@ -161,6 +163,7 @@ public class frmmain extends javax.swing.JFrame {
 
         bttnupdate.setBackground(new java.awt.Color(237, 231, 217));
         bttnupdate.setFont(new java.awt.Font("Century Gothic", 1, 18)); // NOI18N
+        bttnupdate.setForeground(java.awt.Color.black);
         bttnupdate.setIcon(new javax.swing.ImageIcon(getClass().getResource("/assets/i-square-plus.png"))); // NOI18N
         bttnupdate.setText("UPDATE");
         bttnupdate.setToolTipText("");
@@ -175,6 +178,7 @@ public class frmmain extends javax.swing.JFrame {
 
         bttnhome.setBackground(new java.awt.Color(209, 190, 158));
         bttnhome.setFont(new java.awt.Font("Century Gothic", 1, 18)); // NOI18N
+        bttnhome.setForeground(java.awt.Color.black);
         bttnhome.setIcon(new javax.swing.ImageIcon(getClass().getResource("/assets/i-home.png"))); // NOI18N
         bttnhome.setText("HOME");
         bttnhome.setToolTipText("");

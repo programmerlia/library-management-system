@@ -27,6 +27,7 @@ public class pnlrecords extends javax.swing.JPanel {
         initComponents();
         fetchDataAndDisplay();
         jTable2.setModel(tableModel);
+        
         bttncheckout.setEnabled(false);
     }
     private DefaultTableModel  tableModel = new DefaultTableModel(new String[]{"Cover", "ISBN", "Title", "Author", "Genre", "Genre List", "Publish Date"}, 0);;
@@ -133,7 +134,7 @@ public class pnlrecords extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void bttncheckoutActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bttncheckoutActionPerformed
-        this.setVisible(false);
+       
         new frmcheckout().setVisible(true);
     }//GEN-LAST:event_bttncheckoutActionPerformed
 

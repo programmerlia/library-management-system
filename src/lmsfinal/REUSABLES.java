@@ -8,10 +8,13 @@ import java.awt.event.ActionListener;
 import java.util.ArrayList;
 
 public class REUSABLES {
-    
-    
+        
     public static  DefaultListModel modelBook = new DefaultListModel();
     public static  DefaultListModel modelIsbn = new DefaultListModel();
+    public static  ArrayList<String> arrBook = new ArrayList<>();
+    public static  ArrayList<String> arrIsbn = new ArrayList<>();
+    
+    
     
       public static boolean checkNotNull(Object... objects) {
         for (Object obj : objects) {

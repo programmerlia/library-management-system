@@ -143,6 +143,8 @@ public class pnlrecords extends javax.swing.JPanel {
         for (int i : jTable2.getSelectedRows()){
             REUSABLES.modelBook.addElement(jTable2.getValueAt(i, 2));
             REUSABLES.modelIsbn.addElement(jTable2.getValueAt(i, 1));
+            REUSABLES.arrBook.add(jTable2.getValueAt(i, 2).toString());
+            REUSABLES.arrIsbn.add(jTable2.getValueAt(i, 1).toString());
         }
         
         this.setVisible(false);

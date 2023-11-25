@@ -25,10 +25,12 @@ public class pnlrecords extends javax.swing.JPanel {
 
     public pnlrecords() {
         initComponents();
-        fetchDataAndDisplay();
         jTable2.setModel(tableModel);
-        
+        jComboBox1.setSelectedIndex(0);
+        jTextField1.setText(null);
         bttncheckout.setEnabled(false);
+        
+        fetchDataAndDisplay();
     }
     private DefaultTableModel  tableModel = new DefaultTableModel(new String[]{"Cover", "ISBN", "Title", "Author", "Genre", "Genre List", "Publish Date"}, 0);;
   
@@ -45,6 +47,8 @@ public class pnlrecords extends javax.swing.JPanel {
         jLabel18 = new javax.swing.JLabel();
         bttnsearh = new javax.swing.JButton();
         bttnrefresh = new javax.swing.JButton();
+        jComboBox1 = new javax.swing.JComboBox<>();
+        jLabel19 = new javax.swing.JLabel();
 
         setBackground(new java.awt.Color(55, 2, 2));
         setForeground(java.awt.Color.white);
@@ -111,8 +115,8 @@ public class pnlrecords extends javax.swing.JPanel {
 
         jLabel18.setFont(new java.awt.Font("Century Gothic", 0, 12)); // NOI18N
         jLabel18.setForeground(java.awt.Color.white);
-        jLabel18.setText("Search Title");
-        add(jLabel18, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 10, 370, -1));
+        jLabel18.setText("Genre");
+        add(jLabel18, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 10, 120, -1));
 
         bttnsearh.setBackground(new java.awt.Color(165, 36, 34));
         bttnsearh.setIcon(new javax.swing.ImageIcon(getClass().getResource("/assets/zoom.png"))); // NOI18N
@@ -135,6 +139,19 @@ public class pnlrecords extends javax.swing.JPanel {
             }
         });
         add(bttnrefresh, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 20, 30, 30));
+
+        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { " ", "Fiction", "Non-Fiction" }));
+        jComboBox1.addContainerListener(new java.awt.event.ContainerAdapter() {
+            public void componentRemoved(java.awt.event.ContainerEvent evt) {
+                jComboBox1ComponentRemoved(evt);
+            }
+        });
+        add(jComboBox1, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 30, 130, -1));
+
+        jLabel19.setFont(new java.awt.Font("Century Gothic", 0, 12)); // NOI18N
+        jLabel19.setForeground(java.awt.Color.white);
+        jLabel19.setText("Search Title");
+        add(jLabel19, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 10, 370, -1));
     }// </editor-fold>//GEN-END:initComponents
 
     private void bttncheckoutActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bttncheckoutActionPerformed
@@ -160,8 +177,15 @@ public class pnlrecords extends javax.swing.JPanel {
 
     private void bttnsearhActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bttnsearhActionPerformed
         String words = jTextField1.getText();
-                clearTable();
-        fetchDataAndDisplay(words);
+        clearTable();
+        String selectedOption = (String) jComboBox1.getSelectedItem();
+
+        if (selectedOption.equals(" ")) {
+            fetchDataAndDisplay(words);
+        } else if (selectedOption.equals("Fiction") || selectedOption.equals("Non-Fiction")) {
+            String selectedText = (String) jComboBox1.getSelectedItem();
+            fetchDataAndDisplay(words, selectedText);
+        }
 
     }//GEN-LAST:event_bttnsearhActionPerformed
 
@@ -188,7 +212,35 @@ public class pnlrecords extends javax.swing.JPanel {
         
     }//GEN-LAST:event_jTable2MouseClicked
 
-    private void fetchDataAndDisplay() {
+    private void jComboBox1ComponentRemoved(java.awt.event.ContainerEvent evt) {//GEN-FIRST:event_jComboBox1ComponentRemoved
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jComboBox1ComponentRemoved
+
+   
+    private void clearTable() {
+    DefaultTableModel model = (DefaultTableModel) jTable2.getModel();
+    model.setRowCount(0);
+} 
+    
+    private void setTableModification(){
+        jTable2.getColumnModel().getColumn(0).setCellRenderer(new ImageRenderer());
+        jTable2.setRowHeight(120);
+        jTable2.getColumnModel().getColumn(0).setPreferredWidth(70);
+        jTable2.setDefaultEditor(Object.class, null);
+        jTable2.setCellSelectionEnabled(false);
+        jTable2.setColumnSelectionAllowed(false);
+        jTable2.setRowSelectionAllowed(true);
+        jTable2.setSelectionMode(ListSelectionModel.MULTIPLE_INTERVAL_SELECTION);
+        for (int i = 1; i < jTable2.getColumnCount(); i++) {
+            jTable2.getColumnModel().getColumn(i).setCellRenderer(new WrapTextRenderer());
+        }
+        DefaultTableCellRenderer centerRenderer = new DefaultTableCellRenderer();
+        centerRenderer.setHorizontalAlignment(SwingConstants.CENTER);
+        for (int i = 1; i < jTable2.getColumnCount(); i++) {
+            jTable2.getColumnModel().getColumn(i).setCellRenderer(centerRenderer);
+        }
+    }
+     private void fetchDataAndDisplay() {
         String sql = "SELECT isbn, title, author, genre, genrelist, publishdate, cover FROM tbl_books";
         ResultSet resultSet = null;
         
@@ -214,29 +266,6 @@ public class pnlrecords extends javax.swing.JPanel {
         e.printStackTrace();
     }
 }
-    private void clearTable() {
-    DefaultTableModel model = (DefaultTableModel) jTable2.getModel();
-    model.setRowCount(0);
-} 
-    
-    private void setTableModification(){
-        jTable2.getColumnModel().getColumn(0).setCellRenderer(new ImageRenderer());
-        jTable2.setRowHeight(120);
-        jTable2.getColumnModel().getColumn(0).setPreferredWidth(70);
-        jTable2.setDefaultEditor(Object.class, null);
-        jTable2.setCellSelectionEnabled(false);
-        jTable2.setColumnSelectionAllowed(false);
-        jTable2.setRowSelectionAllowed(true);
-        jTable2.setSelectionMode(ListSelectionModel.MULTIPLE_INTERVAL_SELECTION);
-        for (int i = 1; i < jTable2.getColumnCount(); i++) {
-            jTable2.getColumnModel().getColumn(i).setCellRenderer(new WrapTextRenderer());
-        }
-        DefaultTableCellRenderer centerRenderer = new DefaultTableCellRenderer();
-        centerRenderer.setHorizontalAlignment(SwingConstants.CENTER);
-        for (int i = 1; i < jTable2.getColumnCount(); i++) {
-            jTable2.getColumnModel().getColumn(i).setCellRenderer(centerRenderer);
-        }
-    }
     private void fetchDataAndDisplay(String words) {
         String sql = "SELECT isbn, title, author, genre, genrelist, publishdate, cover FROM tbl_books WHERE title LIKE ?";
         ResultSet resultSet = null;
@@ -265,7 +294,35 @@ public class pnlrecords extends javax.swing.JPanel {
         e.printStackTrace();
     }
 }
- 
+ private void fetchDataAndDisplay(String words, String genreop) {
+    String sql = "SELECT isbn, title, author, genre, genrelist, publishdate, cover FROM tbl_books WHERE title LIKE ? AND genre = ?";
+    ResultSet resultSet = null;
+    try {
+        PreparedStatement preparedStatement = DB.open().prepareStatement(sql);
+        preparedStatement.setString(1, "%" + words + "%");
+        preparedStatement.setString(2, genreop);
+        resultSet = preparedStatement.executeQuery();
+
+        while (resultSet.next()) {
+            String isbn = resultSet.getString("isbn");
+            String title = resultSet.getString("title");
+            String author = resultSet.getString("author");
+            String genre = resultSet.getString("genre");
+            String genreList = resultSet.getString("genrelist");
+            String publishDate = resultSet.getString("publishdate");
+
+            java.sql.Blob blob = resultSet.getBlob("cover");
+            byte[] imageData = blob.getBytes(1, (int) blob.length());
+            ImageIcon imageIcon = new ImageIcon(imageData);
+
+            tableModel.addRow(new Object[]{imageIcon, isbn, title, author, genre, genreList, publishDate});
+        }
+        jTable2.setModel(tableModel);
+        setTableModification();
+    } catch (SQLException e) {
+        e.printStackTrace();
+    }
+}
 public class WrapTextRenderer extends DefaultTableCellRenderer {
     @Override
     public Component getTableCellRendererComponent(JTable table, Object value, boolean isSelected, boolean hasFocus, int row, int column) {
@@ -310,7 +367,9 @@ public class WrapTextRenderer extends DefaultTableCellRenderer {
     private javax.swing.JButton bttnrefresh;
     private javax.swing.JButton bttnsearh;
     private com.formdev.flatlaf.ui.FlatMenuBarUI flatMenuBarUI1;
+    private javax.swing.JComboBox<String> jComboBox1;
     private javax.swing.JLabel jLabel18;
+    private javax.swing.JLabel jLabel19;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JTable jTable2;
     private javax.swing.JTextField jTextField1;

@@ -72,7 +72,6 @@ public class frmcheckout extends javax.swing.JFrame{
         jDateChooser2 = new com.toedter.calendar.JDateChooser();
         jDateChooser3 = new com.toedter.calendar.JDateChooser();
         jButton1 = new javax.swing.JButton();
-        jLabel28 = new javax.swing.JLabel();
         jLabel29 = new javax.swing.JLabel();
         jLabel30 = new javax.swing.JLabel();
         jLabel35 = new javax.swing.JLabel();
@@ -93,6 +92,7 @@ public class frmcheckout extends javax.swing.JFrame{
         jScrollPane1 = new javax.swing.JScrollPane();
         tblRec = new javax.swing.JTable();
         jLabel3 = new javax.swing.JLabel();
+        jLabel31 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setBackground(new java.awt.Color(255, 255, 255));
@@ -159,8 +159,8 @@ public class frmcheckout extends javax.swing.JFrame{
         jLabel26.setToolTipText("");
         jPanel1.add(jLabel26, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 100, 110, -1));
 
-        cmbQuant.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "1", "2", "3", "4" }));
-        cmbQuant.setToolTipText("Select the book's title then adjust the book's quantity");
+        cmbQuant.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "1", "2", "3" }));
+        cmbQuant.setToolTipText("Select the book's title then set the book's quantity");
         cmbQuant.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 cmbQuantActionPerformed(evt);
@@ -187,11 +187,6 @@ public class frmcheckout extends javax.swing.JFrame{
             }
         });
         jPanel1.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 370, -1, -1));
-
-        jLabel28.setFont(new java.awt.Font("Century Gothic", 0, 14)); // NOI18N
-        jLabel28.setForeground(java.awt.Color.white);
-        jLabel28.setText("Book:");
-        jPanel1.add(jLabel28, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 120, 50, -1));
 
         jLabel29.setFont(new java.awt.Font("Century Gothic", 0, 14)); // NOI18N
         jLabel29.setForeground(java.awt.Color.white);
@@ -266,6 +261,7 @@ public class frmcheckout extends javax.swing.JFrame{
         lblOverFee.setText("P0");
         jPanel1.add(lblOverFee, new org.netbeans.lib.awtextra.AbsoluteConstraints(570, 360, 110, -1));
 
+        listBook.setToolTipText("Select a book title then set its quantity afterwards");
         listBook.setOpaque(false);
         listBook.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -297,6 +293,11 @@ public class frmcheckout extends javax.swing.JFrame{
         jLabel3.setForeground(new java.awt.Color(51, 51, 51));
         jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/assets/receipt1.png"))); // NOI18N
         jPanel1.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 90, 310, 320));
+
+        jLabel31.setFont(new java.awt.Font("Century Gothic", 0, 14)); // NOI18N
+        jLabel31.setForeground(java.awt.Color.white);
+        jLabel31.setText("Book:");
+        jPanel1.add(jLabel31, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 120, 50, -1));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -403,10 +404,10 @@ public class frmcheckout extends javax.swing.JFrame{
     private javax.swing.JLabel jLabel23;
     private javax.swing.JLabel jLabel24;
     private javax.swing.JLabel jLabel26;
-    private javax.swing.JLabel jLabel28;
     private javax.swing.JLabel jLabel29;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel30;
+    private javax.swing.JLabel jLabel31;
     private javax.swing.JLabel jLabel35;
     private javax.swing.JLabel jLabel36;
     private javax.swing.JLabel jLabel37;

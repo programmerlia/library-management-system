@@ -86,6 +86,7 @@ public class pnlrecords extends javax.swing.JPanel {
         jTable2.setRowMargin(4);
         jTable2.setSelectionBackground(new java.awt.Color(248, 135, 62));
         jTable2.setSelectionMode(javax.swing.ListSelectionModel.MULTIPLE_INTERVAL_SELECTION);
+        jTable2.setSelectionMode(javax.swing.ListSelectionModel.MULTIPLE_INTERVAL_SELECTION);
         jTable2.setShowHorizontalLines(true);
         jTable2.setVerifyInputWhenFocusTarget(false);
         jTable2.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -111,7 +112,7 @@ public class pnlrecords extends javax.swing.JPanel {
         jLabel18.setFont(new java.awt.Font("Century Gothic", 0, 12)); // NOI18N
         jLabel18.setForeground(java.awt.Color.white);
         jLabel18.setText("Search Title");
-        add(jLabel18, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 10, 70, -1));
+        add(jLabel18, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 10, 370, -1));
 
         bttnsearh.setBackground(new java.awt.Color(165, 36, 34));
         bttnsearh.setIcon(new javax.swing.ImageIcon(getClass().getResource("/assets/zoom.png"))); // NOI18N
@@ -137,8 +138,14 @@ public class pnlrecords extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void bttncheckoutActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bttncheckoutActionPerformed
-        REUSABLES.strngBook=String.valueOf(jTable2.getValueAt(jTable2.getSelectedRow(), 2));
-        REUSABLES.strngIsbn=String.valueOf(jTable2.getValueAt(jTable2.getSelectedRow(), 1));
+        
+        
+        for (int i : jTable2.getSelectedRows()){
+            REUSABLES.modelBook.addElement(jTable2.getValueAt(i, 2));
+            REUSABLES.modelIsbn.addElement(jTable2.getValueAt(i, 1));
+        }
+        
+        this.setVisible(false);
         new frmcheckout().setVisible(true);
     }//GEN-LAST:event_bttncheckoutActionPerformed
 
@@ -163,15 +170,20 @@ public class pnlrecords extends javax.swing.JPanel {
     }//GEN-LAST:event_bttnrefreshActionPerformed
 
     private void jTable2MouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable2MouseReleased
+
+        
         if (!jTable2.getSelectionModel().isSelectionEmpty()){
             bttncheckout.setEnabled(true);
         }
         
         
+        
+        
+
     }//GEN-LAST:event_jTable2MouseReleased
 
     private void jTable2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable2MouseClicked
-        // TODO add your handling code here:
+        
     }//GEN-LAST:event_jTable2MouseClicked
 
     private void fetchDataAndDisplay() {
@@ -213,7 +225,7 @@ public class pnlrecords extends javax.swing.JPanel {
         jTable2.setCellSelectionEnabled(false);
         jTable2.setColumnSelectionAllowed(false);
         jTable2.setRowSelectionAllowed(true);
-        //jTable2.setSelectionMode(ListSelectionModel.MULTIPLE_INTERVAL_SELECTION);
+        jTable2.setSelectionMode(ListSelectionModel.MULTIPLE_INTERVAL_SELECTION);
         for (int i = 1; i < jTable2.getColumnCount(); i++) {
             jTable2.getColumnModel().getColumn(i).setCellRenderer(new WrapTextRenderer());
         }

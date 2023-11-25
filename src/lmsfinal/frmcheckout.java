@@ -6,10 +6,9 @@ package lmsfinal;
 
 import com.formdev.flatlaf.FlatLightLaf;
 import java.awt.Color;
-import java.time.LocalDate;
-import java.time.LocalDateTime;
 import java.time.ZoneId;
 import java.util.Calendar;
+import java.util.concurrent.TimeUnit;
 import javax.swing.UIManager;
 import javax.swing.UnsupportedLookAndFeelException;
 import java.time.temporal.ChronoUnit;
@@ -25,11 +24,11 @@ public class frmcheckout extends javax.swing.JFrame{
         
         setVisible(false);
         initComponents();
-        lblTitle.setText(REUSABLES.strngBook);
-        lblIsbn.setText(REUSABLES.strngIsbn);
         
-        lblRecTitle.setVisible(false);
-        lblRecIsbn.setVisible(false);
+        listBook.setModel(REUSABLES.modelBook);
+        listIsbn.setModel(REUSABLES.modelIsbn);
+        
+        
         lblRecQuant.setVisible(false);
         lblRecBorName.setVisible(false);
         lblDayHand.setVisible(false);
@@ -53,7 +52,6 @@ public class frmcheckout extends javax.swing.JFrame{
         jLabel1 = new javax.swing.JLabel();
         jPanel6 = new javax.swing.JPanel();
         jLabel18 = new javax.swing.JLabel();
-        lblIsbn = new javax.swing.JLabel();
         jLabel20 = new javax.swing.JLabel();
         jLabel21 = new javax.swing.JLabel();
         jLabel22 = new javax.swing.JLabel();
@@ -67,12 +65,10 @@ public class frmcheckout extends javax.swing.JFrame{
         jDateChooser2 = new com.toedter.calendar.JDateChooser();
         jDateChooser3 = new com.toedter.calendar.JDateChooser();
         jButton1 = new javax.swing.JButton();
-        lblTitle = new javax.swing.JLabel();
         jLabel28 = new javax.swing.JLabel();
         jLabel29 = new javax.swing.JLabel();
         jLabel30 = new javax.swing.JLabel();
         jLabel31 = new javax.swing.JLabel();
-        lblRecTitle = new javax.swing.JLabel();
         jLabel33 = new javax.swing.JLabel();
         jLabel34 = new javax.swing.JLabel();
         jLabel35 = new javax.swing.JLabel();
@@ -82,7 +78,6 @@ public class frmcheckout extends javax.swing.JFrame{
         jLabel39 = new javax.swing.JLabel();
         jLabel40 = new javax.swing.JLabel();
         jSeparator1 = new javax.swing.JSeparator();
-        lblRecIsbn = new javax.swing.JLabel();
         lblRecQuant = new javax.swing.JLabel();
         lblRecBorName = new javax.swing.JLabel();
         lblDayHand = new javax.swing.JLabel();
@@ -90,13 +85,21 @@ public class frmcheckout extends javax.swing.JFrame{
         lblServFee = new javax.swing.JLabel();
         lblBookFee = new javax.swing.JLabel();
         lblOverFee = new javax.swing.JLabel();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        listIsbn = new javax.swing.JList<>();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        listBook = new javax.swing.JList<>();
+        jScrollPane4 = new javax.swing.JScrollPane();
+        listRecBook = new javax.swing.JList<>();
+        jScrollPane5 = new javax.swing.JScrollPane();
+        listRecIsbn = new javax.swing.JList<>();
         jLabel3 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setBackground(new java.awt.Color(255, 255, 255));
 
         jPanel1.setBackground(new java.awt.Color(55, 2, 2));
-        jPanel1.setPreferredSize(new java.awt.Dimension(600, 400));
+        jPanel1.setPreferredSize(new java.awt.Dimension(600, 450));
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel1.setFont(new java.awt.Font("Century Gothic", 1, 18)); // NOI18N
@@ -123,12 +126,7 @@ public class frmcheckout extends javax.swing.JFrame{
         jLabel18.setFont(new java.awt.Font("Century Gothic", 0, 14)); // NOI18N
         jLabel18.setForeground(java.awt.Color.white);
         jLabel18.setText("Quantity:");
-        jPanel1.add(jLabel18, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 180, 140, -1));
-
-        lblIsbn.setFont(new java.awt.Font("Century Gothic", 0, 14)); // NOI18N
-        lblIsbn.setForeground(java.awt.Color.white);
-        lblIsbn.setText("isbn string");
-        jPanel1.add(lblIsbn, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 150, 110, -1));
+        jPanel1.add(jLabel18, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 210, 140, -1));
 
         jLabel20.setFont(new java.awt.Font("Century Gothic", 0, 14)); // NOI18N
         jLabel20.setForeground(java.awt.Color.white);
@@ -138,49 +136,49 @@ public class frmcheckout extends javax.swing.JFrame{
         jLabel21.setFont(new java.awt.Font("Century Gothic", 0, 14)); // NOI18N
         jLabel21.setForeground(java.awt.Color.white);
         jLabel21.setText("Date Received:");
-        jPanel1.add(jLabel21, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 310, 140, -1));
+        jPanel1.add(jLabel21, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 330, 140, -1));
 
         jLabel22.setFont(new java.awt.Font("Century Gothic", 0, 14)); // NOI18N
         jLabel22.setForeground(java.awt.Color.white);
         jLabel22.setText("Borrower's Name:");
-        jPanel1.add(jLabel22, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 210, 140, -1));
+        jPanel1.add(jLabel22, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 240, 140, -1));
 
         jLabel23.setFont(new java.awt.Font("Century Gothic", 0, 14)); // NOI18N
         jLabel23.setForeground(java.awt.Color.white);
         jLabel23.setText("Date Borrowed:");
-        jPanel1.add(jLabel23, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 250, 140, -1));
+        jPanel1.add(jLabel23, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 270, 140, -1));
 
         jLabel24.setFont(new java.awt.Font("Century Gothic", 0, 14)); // NOI18N
         jLabel24.setForeground(java.awt.Color.white);
         jLabel24.setText("Date Due:");
-        jPanel1.add(jLabel24, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 280, 140, -1));
+        jPanel1.add(jLabel24, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 300, 140, -1));
 
         lblTotalFee.setFont(new java.awt.Font("Century Gothic", 1, 14)); // NOI18N
         lblTotalFee.setForeground(new java.awt.Color(51, 51, 51));
         lblTotalFee.setText("TOTAL");
-        jPanel1.add(lblTotalFee, new org.netbeans.lib.awtextra.AbsoluteConstraints(550, 360, 110, -1));
+        jPanel1.add(lblTotalFee, new org.netbeans.lib.awtextra.AbsoluteConstraints(550, 370, 110, -1));
 
         jLabel26.setFont(new java.awt.Font("Century Gothic", 1, 18)); // NOI18N
         jLabel26.setForeground(new java.awt.Color(51, 51, 51));
         jLabel26.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel26.setText("RECEIPT");
         jLabel26.setToolTipText("");
-        jPanel1.add(jLabel26, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 90, 110, -1));
+        jPanel1.add(jLabel26, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 100, 110, -1));
 
         cmbQuant.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "1", "2", "3", "4" }));
-        jPanel1.add(cmbQuant, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 180, -1, -1));
+        jPanel1.add(cmbQuant, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 210, -1, -1));
 
         txtBorName.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtBorNameActionPerformed(evt);
             }
         });
-        jPanel1.add(txtBorName, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 210, 120, -1));
+        jPanel1.add(txtBorName, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 240, 120, -1));
 
         jDateChooser1.setFocusable(false);
-        jPanel1.add(jDateChooser1, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 280, 150, -1));
-        jPanel1.add(jDateChooser2, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 310, 150, -1));
-        jPanel1.add(jDateChooser3, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 250, 150, -1));
+        jPanel1.add(jDateChooser1, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 270, 150, -1));
+        jPanel1.add(jDateChooser2, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 300, 150, -1));
+        jPanel1.add(jDateChooser3, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 330, 150, -1));
 
         jButton1.setText("Generate Receipt");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
@@ -189,11 +187,6 @@ public class frmcheckout extends javax.swing.JFrame{
             }
         });
         jPanel1.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 370, -1, -1));
-
-        lblTitle.setFont(new java.awt.Font("Century Gothic", 0, 14)); // NOI18N
-        lblTitle.setForeground(java.awt.Color.white);
-        lblTitle.setText("book string");
-        jPanel1.add(lblTitle, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 120, 110, -1));
 
         jLabel28.setFont(new java.awt.Font("Century Gothic", 0, 14)); // NOI18N
         jLabel28.setForeground(java.awt.Color.white);
@@ -208,104 +201,112 @@ public class frmcheckout extends javax.swing.JFrame{
         jLabel30.setFont(new java.awt.Font("Century Gothic", 1, 14)); // NOI18N
         jLabel30.setForeground(new java.awt.Color(51, 51, 51));
         jLabel30.setText("Days in Hand:");
-        jPanel1.add(jLabel30, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 220, 130, -1));
+        jPanel1.add(jLabel30, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 240, 130, -1));
 
         jLabel31.setFont(new java.awt.Font("Century Gothic", 1, 14)); // NOI18N
         jLabel31.setForeground(new java.awt.Color(51, 51, 51));
         jLabel31.setText("Book:");
-        jPanel1.add(jLabel31, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 120, 50, -1));
-
-        lblRecTitle.setFont(new java.awt.Font("Century Gothic", 0, 14)); // NOI18N
-        lblRecTitle.setForeground(new java.awt.Color(51, 51, 51));
-        lblRecTitle.setText("book");
-        jPanel1.add(lblRecTitle, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 120, 110, -1));
+        jPanel1.add(jLabel31, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 130, 50, -1));
 
         jLabel33.setFont(new java.awt.Font("Century Gothic", 1, 14)); // NOI18N
         jLabel33.setForeground(new java.awt.Color(51, 51, 51));
         jLabel33.setText("ISBN:");
-        jPanel1.add(jLabel33, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 140, 50, -1));
+        jPanel1.add(jLabel33, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 160, 50, -1));
 
         jLabel34.setFont(new java.awt.Font("Century Gothic", 1, 14)); // NOI18N
         jLabel34.setForeground(new java.awt.Color(51, 51, 51));
         jLabel34.setText("Quantity: ");
-        jPanel1.add(jLabel34, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 170, 70, -1));
+        jPanel1.add(jLabel34, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 200, 70, -1));
 
         jLabel35.setFont(new java.awt.Font("Century Gothic", 1, 14)); // NOI18N
         jLabel35.setForeground(new java.awt.Color(51, 51, 51));
         jLabel35.setText("Borrower's Name:");
-        jPanel1.add(jLabel35, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 190, 130, -1));
+        jPanel1.add(jLabel35, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 220, 130, -1));
 
         jLabel36.setFont(new java.awt.Font("Century Gothic", 1, 14)); // NOI18N
         jLabel36.setForeground(new java.awt.Color(51, 51, 51));
         jLabel36.setText("Overdue Fee");
-        jPanel1.add(jLabel36, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 340, 130, -1));
+        jPanel1.add(jLabel36, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 350, 130, -1));
 
         jLabel37.setFont(new java.awt.Font("Century Gothic", 1, 14)); // NOI18N
         jLabel37.setForeground(new java.awt.Color(51, 51, 51));
         jLabel37.setText("Days Overdue:");
-        jPanel1.add(jLabel37, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 250, 130, -1));
+        jPanel1.add(jLabel37, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 260, 130, -1));
 
         jLabel38.setFont(new java.awt.Font("Century Gothic", 1, 14)); // NOI18N
         jLabel38.setForeground(new java.awt.Color(51, 51, 51));
         jLabel38.setText("Fees:");
-        jPanel1.add(jLabel38, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 280, 130, -1));
+        jPanel1.add(jLabel38, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 290, 130, -1));
 
         jLabel39.setFont(new java.awt.Font("Century Gothic", 1, 14)); // NOI18N
         jLabel39.setForeground(new java.awt.Color(51, 51, 51));
         jLabel39.setText("Service Fee");
-        jPanel1.add(jLabel39, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 300, 130, -1));
+        jPanel1.add(jLabel39, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 310, 130, -1));
 
         jLabel40.setFont(new java.awt.Font("Century Gothic", 1, 14)); // NOI18N
         jLabel40.setForeground(new java.awt.Color(51, 51, 51));
         jLabel40.setText("Book Fee");
-        jPanel1.add(jLabel40, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 320, 130, -1));
+        jPanel1.add(jLabel40, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 330, 130, -1));
 
         jSeparator1.setForeground(new java.awt.Color(51, 51, 51));
-        jPanel1.add(jSeparator1, new org.netbeans.lib.awtextra.AbsoluteConstraints(540, 360, 100, 10));
-
-        lblRecIsbn.setFont(new java.awt.Font("Century Gothic", 0, 14)); // NOI18N
-        lblRecIsbn.setForeground(new java.awt.Color(51, 51, 51));
-        lblRecIsbn.setText("isbn");
-        jPanel1.add(lblRecIsbn, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 140, 110, -1));
+        jPanel1.add(jSeparator1, new org.netbeans.lib.awtextra.AbsoluteConstraints(540, 370, 100, 10));
 
         lblRecQuant.setFont(new java.awt.Font("Century Gothic", 0, 14)); // NOI18N
         lblRecQuant.setForeground(new java.awt.Color(51, 51, 51));
         lblRecQuant.setText("1");
-        jPanel1.add(lblRecQuant, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 170, 110, -1));
+        jPanel1.add(lblRecQuant, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 200, 110, -1));
 
         lblRecBorName.setFont(new java.awt.Font("Century Gothic", 0, 14)); // NOI18N
         lblRecBorName.setForeground(new java.awt.Color(51, 51, 51));
-        lblRecBorName.setText("hell yea");
-        jPanel1.add(lblRecBorName, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 190, 110, -1));
+        lblRecBorName.setText("name");
+        jPanel1.add(lblRecBorName, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 220, 110, -1));
 
         lblDayHand.setFont(new java.awt.Font("Century Gothic", 0, 14)); // NOI18N
         lblDayHand.setForeground(new java.awt.Color(51, 51, 51));
         lblDayHand.setText("date");
-        jPanel1.add(lblDayHand, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 220, 110, -1));
+        jPanel1.add(lblDayHand, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 240, 170, -1));
 
         lblDayOver.setFont(new java.awt.Font("Century Gothic", 0, 14)); // NOI18N
         lblDayOver.setForeground(new java.awt.Color(51, 51, 51));
         lblDayOver.setText("date");
-        jPanel1.add(lblDayOver, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 250, 110, -1));
+        jPanel1.add(lblDayOver, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 260, 160, -1));
 
         lblServFee.setFont(new java.awt.Font("Century Gothic", 0, 14)); // NOI18N
         lblServFee.setForeground(new java.awt.Color(51, 51, 51));
         lblServFee.setText("P0");
-        jPanel1.add(lblServFee, new org.netbeans.lib.awtextra.AbsoluteConstraints(550, 300, 110, -1));
+        jPanel1.add(lblServFee, new org.netbeans.lib.awtextra.AbsoluteConstraints(550, 310, 110, -1));
 
         lblBookFee.setFont(new java.awt.Font("Century Gothic", 0, 14)); // NOI18N
         lblBookFee.setForeground(new java.awt.Color(51, 51, 51));
         lblBookFee.setText("P0");
-        jPanel1.add(lblBookFee, new org.netbeans.lib.awtextra.AbsoluteConstraints(550, 320, 110, -1));
+        jPanel1.add(lblBookFee, new org.netbeans.lib.awtextra.AbsoluteConstraints(550, 330, 110, -1));
 
         lblOverFee.setFont(new java.awt.Font("Century Gothic", 0, 14)); // NOI18N
         lblOverFee.setForeground(new java.awt.Color(51, 51, 51));
         lblOverFee.setText("P0");
-        jPanel1.add(lblOverFee, new org.netbeans.lib.awtextra.AbsoluteConstraints(550, 340, 110, -1));
+        jPanel1.add(lblOverFee, new org.netbeans.lib.awtextra.AbsoluteConstraints(550, 350, 110, -1));
+
+        jScrollPane1.setViewportView(listIsbn);
+
+        jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 160, 170, 40));
+
+        jScrollPane2.setViewportView(listBook);
+
+        jPanel1.add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 110, 170, 40));
+
+        listRecBook.setBorder(null);
+        jScrollPane4.setViewportView(listRecBook);
+
+        jPanel1.add(jScrollPane4, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 130, 150, 30));
+
+        listRecIsbn.setBorder(null);
+        jScrollPane5.setViewportView(listRecIsbn);
+
+        jPanel1.add(jScrollPane5, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 160, 150, 30));
 
         jLabel3.setForeground(new java.awt.Color(51, 51, 51));
         jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/assets/receipt1.png"))); // NOI18N
-        jPanel1.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 80, 310, 320));
+        jPanel1.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 90, 310, 320));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -315,7 +316,7 @@ public class frmcheckout extends javax.swing.JFrame{
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 410, Short.MAX_VALUE)
         );
 
         pack();
@@ -326,8 +327,14 @@ public class frmcheckout extends javax.swing.JFrame{
     }//GEN-LAST:event_txtBorNameActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        lblRecTitle.setVisible(true);
-        lblRecIsbn.setVisible(true);
+        
+        java.util.Date date1=jDateChooser1.getDate();
+        java.util.Date date2=jDateChooser2.getDate();
+        java.util.Date date3=jDateChooser3.getDate();
+
+        
+        listRecBook.setVisible(true);
+        listRecIsbn.setVisible(true);
         lblRecQuant.setVisible(true);
         lblRecBorName.setVisible(true);
         lblDayHand.setVisible(true);
@@ -337,12 +344,25 @@ public class frmcheckout extends javax.swing.JFrame{
         lblOverFee.setVisible(true);
         lblTotalFee.setVisible(true);
         
-        lblRecTitle.setText(lblTitle.getText());
-        lblRecIsbn.setText(lblIsbn.getText());
+        listRecBook.setModel(REUSABLES.modelBook);
+        listRecIsbn.setModel(REUSABLES.modelIsbn);
         lblRecQuant.setText(String.valueOf(cmbQuant.getSelectedItem()));
         lblRecBorName.setText(txtBorName.getText());
-                
+        lblDayHand.setText(Long.toString(TimeUnit.DAYS.convert(date3.getTime() - date1.getTime(), TimeUnit.MILLISECONDS)));
+        lblDayOver.setText(Long.toString(TimeUnit.DAYS.convert(date3.getTime() - date2.getTime(), TimeUnit.MILLISECONDS)));
+        
+        
+        double servFee=5;
+        double bookFee=40 * Integer.parseInt(cmbQuant.getSelectedItem().toString());
+        double overFee=bookFee* Integer.parseInt(lblDayOver.getText()) * 0.5;
+        double totalFee=servFee+bookFee+overFee;
+        
+        lblServFee.setText("P" + Double.toString(servFee));
+        lblBookFee.setText("P" + Double.toString(bookFee));
+        lblOverFee.setText("P" + Double.toString(overFee));
+        lblTotalFee.setText("P" + Double.toString(totalFee));
     }//GEN-LAST:event_jButton1ActionPerformed
+    
     
     /**
      * @param args the command line arguments
@@ -389,19 +409,23 @@ public class frmcheckout extends javax.swing.JFrame{
     private javax.swing.JLabel jLabel40;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel6;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JScrollPane jScrollPane4;
+    private javax.swing.JScrollPane jScrollPane5;
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JLabel lblBookFee;
     private javax.swing.JLabel lblDayHand;
     private javax.swing.JLabel lblDayOver;
-    private javax.swing.JLabel lblIsbn;
     private javax.swing.JLabel lblOverFee;
     private javax.swing.JLabel lblRecBorName;
-    private javax.swing.JLabel lblRecIsbn;
     private javax.swing.JLabel lblRecQuant;
-    private javax.swing.JLabel lblRecTitle;
     private javax.swing.JLabel lblServFee;
-    private javax.swing.JLabel lblTitle;
     private javax.swing.JLabel lblTotalFee;
+    private javax.swing.JList<String> listBook;
+    private javax.swing.JList<String> listIsbn;
+    private javax.swing.JList<String> listRecBook;
+    private javax.swing.JList<String> listRecIsbn;
     private javax.swing.JTextField txtBorName;
     // End of variables declaration//GEN-END:variables
 }

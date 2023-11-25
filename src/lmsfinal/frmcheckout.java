@@ -211,7 +211,7 @@ public class frmcheckout extends javax.swing.JFrame{
         jLabel36.setFont(new java.awt.Font("Century Gothic", 1, 14)); // NOI18N
         jLabel36.setForeground(new java.awt.Color(51, 51, 51));
         jLabel36.setText("Overdue Fee");
-        jPanel1.add(jLabel36, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 360, 130, 20));
+        jPanel1.add(jLabel36, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 350, 130, 30));
 
         jLabel37.setFont(new java.awt.Font("Century Gothic", 1, 14)); // NOI18N
         jLabel37.setForeground(new java.awt.Color(51, 51, 51));
@@ -342,6 +342,7 @@ public class frmcheckout extends javax.swing.JFrame{
         if(Integer.parseInt(lblDayOver.getText())<0){
             lblDayOver.setText("0");
         }
+        
         
         ArrayList<Integer> arrQuant = new ArrayList<>(REUSABLES.arrBook.size());
         

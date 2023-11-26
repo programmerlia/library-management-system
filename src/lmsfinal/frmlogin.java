@@ -45,11 +45,11 @@ public class frmlogin extends javax.swing.JFrame {
         bttnsignup = new javax.swing.JButton();
         fusername = new javax.swing.JTextField();
         bttnlogin = new javax.swing.JButton();
+        showPass = new javax.swing.JLabel();
         fpassword = new javax.swing.JPasswordField();
         jLabel1 = new javax.swing.JLabel();
 
         setMinimumSize(new java.awt.Dimension(700, 500));
-        setPreferredSize(new java.awt.Dimension(700, 500));
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         bttnclear.setBackground(new java.awt.Color(165, 36, 34));
@@ -101,6 +101,17 @@ public class frmlogin extends javax.swing.JFrame {
             }
         });
         getContentPane().add(bttnlogin, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 360, 110, 40));
+
+        showPass.setIcon(new javax.swing.ImageIcon(getClass().getResource("/assets/picture eye.png"))); // NOI18N
+        showPass.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                showPassMousePressed(evt);
+            }
+            public void mouseReleased(java.awt.event.MouseEvent evt) {
+                showPassMouseReleased(evt);
+            }
+        });
+        getContentPane().add(showPass, new org.netbeans.lib.awtextra.AbsoluteConstraints(600, 230, 30, -1));
 
         fpassword.setBorder(null);
         getContentPane().add(fpassword, new org.netbeans.lib.awtextra.AbsoluteConstraints(412, 236, 210, 20));
@@ -159,6 +170,14 @@ public class frmlogin extends javax.swing.JFrame {
 
     }//GEN-LAST:event_fusernameActionPerformed
 
+    private void showPassMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_showPassMouseReleased
+        fpassword.setEchoChar('\u2022');
+    }//GEN-LAST:event_showPassMouseReleased
+
+    private void showPassMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_showPassMousePressed
+        fpassword.setEchoChar((char)0);
+    }//GEN-LAST:event_showPassMousePressed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton bttnclear;
@@ -167,6 +186,7 @@ public class frmlogin extends javax.swing.JFrame {
     private javax.swing.JPasswordField fpassword;
     private javax.swing.JTextField fusername;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel showPass;
     // End of variables declaration//GEN-END:variables
 
 }

@@ -246,6 +246,23 @@ public class pnlrecords extends javax.swing.JPanel {
     model.setRowCount(0);
 } 
     
+    
+     public class ToggleListSelectionModel extends DefaultListSelectionModel{
+        @Override
+        public void setSelectionInterval(int index0, int index1){
+            if (index0 != index1){
+                super.addSelectionInterval(index0, index1);
+                return;
+            }
+
+            if  (super.isSelectedIndex(index0)){
+                super.removeSelectionInterval(index0, index0);
+            } else{
+                super.addSelectionInterval(index0, index0);
+            }
+        }
+    }
+    
     private void setTableModification(){
         jTable2.getColumnModel().getColumn(0).setCellRenderer(new ImageRenderer());
         jTable2.setRowHeight(120);
@@ -254,7 +271,8 @@ public class pnlrecords extends javax.swing.JPanel {
         jTable2.setCellSelectionEnabled(false);
         jTable2.setColumnSelectionAllowed(false);
         jTable2.setRowSelectionAllowed(true);
-        jTable2.setSelectionMode(ListSelectionModel.MULTIPLE_INTERVAL_SELECTION);
+        //jTable2.setSelectionMode(ListSelectionModel.MULTIPLE_INTERVAL_SELECTION);
+        jTable2.setSelectionModel(new ToggleListSelectionModel());
         for (int i = 1; i < jTable2.getColumnCount(); i++) {
             jTable2.getColumnModel().getColumn(i).setCellRenderer(new WrapTextRenderer());
         }

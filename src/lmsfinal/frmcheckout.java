@@ -11,11 +11,11 @@ import javax.swing.UnsupportedLookAndFeelException;
 import javax.swing.table.DefaultTableModel;
 import java.util.ArrayList;
 import javax.imageio.ImageIO;
+import javax.swing.DefaultListModel;
 import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.filechooser.FileNameExtensionFilter;
-
 public class frmcheckout extends javax.swing.JFrame{
 
 
@@ -50,18 +50,21 @@ public class frmcheckout extends javax.swing.JFrame{
 
     
     private void clear() {
-        listBook.clearSelection();
+        REUSABLES.modelBook = new DefaultListModel();
+        REUSABLES.modelIsbn = new DefaultListModel();
+        REUSABLES.arrBook.clear();
+        REUSABLES.arrIsbn.clear();
+        listBook.setModel(REUSABLES.modelBook);
         cmbQuant.setSelectedItem("1");
         txtBorName.setText("");
         jDateChooser1.setDate(null);
         jDateChooser2.setDate(null);
         jDateChooser3.setDate(null);
-        DefaultTableModel tableModel = (DefaultTableModel) tblRec.getModel();
-        tableModel.setRowCount(0);
-        tblRec.setModel(new DefaultTableModel());
-        lblRecBorName.setText("");
-        lblDayHand.setText("");
-        lblDayOver.setText("");
+        DefaultTableModel tableModel = new DefaultTableModel();
+        tblRec.setModel(tableModel);
+        lblRecBorName.setText(null);
+        lblDayHand.setText(null);
+        lblDayOver.setText(null);
         lblBookFee.setText("");
         lblOverFee.setText("");
         lblServFee.setText("");
@@ -393,48 +396,51 @@ public class frmcheckout extends javax.swing.JFrame{
     private DefaultTableModel  tableModell = new DefaultTableModel(new String[]{"Book Title", "ISBN", "Quantity"}, 0);
     
     private void bttngenerateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bttngenerateActionPerformed
-        
-        java.util.Date date1=jDateChooser1.getDate();
-        java.util.Date date2=jDateChooser2.getDate();
-        java.util.Date date3=jDateChooser3.getDate();
-        
-        
-        lblRecBorName.setVisible(true);
-        lblDayHand.setVisible(true);
-        lblDayOver.setVisible(true);
-        lblServFee.setVisible(true);
-        lblBookFee.setVisible(true);
-        lblOverFee.setVisible(true);
-        lblTotalFee.setVisible(true);
-        
-        
-        lblRecBorName.setText(txtBorName.getText());
-        lblDayHand.setText(Long.toString(TimeUnit.DAYS.convert(date3.getTime() - date1.getTime(), TimeUnit.MILLISECONDS)));
-        lblDayOver.setText(Long.toString(TimeUnit.DAYS.convert(date3.getTime() - date2.getTime(), TimeUnit.MILLISECONDS)));
-        
-        if(Integer.parseInt(lblDayOver.getText())<0){
-            lblDayOver.setText("0");
+        try {
+            if (REUSABLES.checkNotNull(jDateChooser1.getDate(), jDateChooser2.getDate(), jDateChooser3.getDate(), cmbQuant.getSelectedItem(), txtBorName.getText())) {
+                java.util.Date date1 = jDateChooser1.getDate();
+                java.util.Date date2 = jDateChooser2.getDate();
+                java.util.Date date3 = jDateChooser3.getDate();
+
+                lblRecBorName.setVisible(true);
+                lblDayHand.setVisible(true);
+                lblDayOver.setVisible(true);
+                lblServFee.setVisible(true);
+                lblBookFee.setVisible(true);
+                lblOverFee.setVisible(true);
+                lblTotalFee.setVisible(true);
+
+                lblRecBorName.setText(txtBorName.getText());
+                lblDayHand.setText(Long.toString(TimeUnit.DAYS.convert(date3.getTime() - date1.getTime(), TimeUnit.MILLISECONDS)));
+                lblDayOver.setText(Long.toString(TimeUnit.DAYS.convert(date3.getTime() - date2.getTime(), TimeUnit.MILLISECONDS)));
+
+                if (Integer.parseInt(lblDayOver.getText()) < 0) {
+                    lblDayOver.setText("0");
+                }
+
+                ArrayList<Integer> arrQuant = new ArrayList<>(REUSABLES.arrBook.size());
+
+                double bookFee = 0;
+                for (int i = 0; i < REUSABLES.arrBook.size(); i++) {
+                    bookFee += 40 * Integer.valueOf((String) tblRec.getValueAt(i, 2));
+                }
+
+                double servFee = 5;
+                double overFee = bookFee * Integer.parseInt(lblDayOver.getText()) * 0.5;
+                double totalFee = servFee + bookFee + overFee;
+
+                lblServFee.setText("P" + Double.toString(servFee));
+                lblBookFee.setText("P" + Double.toString(bookFee));
+                lblOverFee.setText("P" + Double.toString(overFee));
+                lblTotalFee.setText("P" + Double.toString(totalFee));
+
+                bttnsave.setVisible(true);
+            } else {
+                REUSABLES.showNotif("Please Fill all Fields!");
+            }
+        } catch (Exception e) {
         }
-        
-        
-        ArrayList<Integer> arrQuant = new ArrayList<>(REUSABLES.arrBook.size());
-        
-        double bookFee=0;
-        for(int i=0; i<REUSABLES.arrBook.size();i++){
-            bookFee+=40*Integer.valueOf((String) tblRec.getValueAt(i, 2));
-        }
-        
-        double servFee=5;
-        double overFee=bookFee* Integer.parseInt(lblDayOver.getText()) * 0.5;
-        double totalFee=servFee+bookFee+overFee;
-        
-        lblServFee.setText("P" + Double.toString(servFee));
-        lblBookFee.setText("P" + Double.toString(bookFee));
-        lblOverFee.setText("P" + Double.toString(overFee));
-        lblTotalFee.setText("P" + Double.toString(totalFee));
-        
-        
-         bttnsave.setVisible(true);
+
     }//GEN-LAST:event_bttngenerateActionPerformed
 
     private void cmbQuantActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbQuantActionPerformed
@@ -450,7 +456,8 @@ public class frmcheckout extends javax.swing.JFrame{
     }//GEN-LAST:event_listBookMouseReleased
 
     private void bttnclearActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bttnclearActionPerformed
-      setVisible(false);
+      this.setVisible(false);
+      
     }//GEN-LAST:event_bttnclearActionPerformed
 
     private void bttnsaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bttnsaveActionPerformed

@@ -29,6 +29,7 @@ public class pnlrecords extends javax.swing.JPanel {
         jComboBox1.setSelectedIndex(0);
         jTextField1.setText(null);
         bttncheckout.setEnabled(false);
+        setVisible(true);
         
         fetchDataAndDisplay();
     }
@@ -49,6 +50,7 @@ public class pnlrecords extends javax.swing.JPanel {
         bttnrefresh = new javax.swing.JButton();
         jComboBox1 = new javax.swing.JComboBox<>();
         jLabel19 = new javax.swing.JLabel();
+        bttnclear = new javax.swing.JButton();
 
         setBackground(new java.awt.Color(55, 2, 2));
         setForeground(java.awt.Color.white);
@@ -65,8 +67,7 @@ public class pnlrecords extends javax.swing.JPanel {
         bttncheckout.setFont(new java.awt.Font("Century Gothic", 1, 14)); // NOI18N
         bttncheckout.setForeground(java.awt.Color.white);
         bttncheckout.setText("CHECKOUT");
-        bttncheckout.setBorder(null);
-        bttncheckout.setBorderPainted(false);
+        bttncheckout.setBorder(new com.formdev.flatlaf.ui.FlatEmptyBorder());
         bttncheckout.setVerifyInputWhenFocusTarget(false);
         bttncheckout.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -111,34 +112,39 @@ public class pnlrecords extends javax.swing.JPanel {
                 jTextField1ActionPerformed(evt);
             }
         });
-        add(jTextField1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 30, 340, -1));
+        add(jTextField1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 30, 310, -1));
 
         jLabel18.setFont(new java.awt.Font("Century Gothic", 0, 12)); // NOI18N
         jLabel18.setForeground(java.awt.Color.white);
         jLabel18.setText("Genre");
-        add(jLabel18, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 10, 120, -1));
+        add(jLabel18, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 10, 120, -1));
 
         bttnsearh.setBackground(new java.awt.Color(165, 36, 34));
         bttnsearh.setIcon(new javax.swing.ImageIcon(getClass().getResource("/assets/zoom.png"))); // NOI18N
-        bttnsearh.setBorder(new com.formdev.flatlaf.ui.FlatEmptyBorder());
+        bttnsearh.setToolTipText("Search with Filter");
+        bttnsearh.setBorder(new com.formdev.flatlaf.ui.FlatButtonBorder());
+        bttnsearh.setBorderPainted(false);
         bttnsearh.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         bttnsearh.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 bttnsearhActionPerformed(evt);
             }
         });
-        add(bttnsearh, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 20, 30, 30));
+        add(bttnsearh, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 20, 30, 30));
 
         bttnrefresh.setBackground(new java.awt.Color(165, 36, 34));
-        bttnrefresh.setIcon(new javax.swing.ImageIcon(getClass().getResource("/assets/refresh (2).png"))); // NOI18N
-        bttnrefresh.setBorder(new com.formdev.flatlaf.ui.FlatEmptyBorder());
+        bttnrefresh.setIcon(new javax.swing.ImageIcon(getClass().getResource("/assets/refresh-page-option (1).png"))); // NOI18N
+        bttnrefresh.setToolTipText("Refresh Table");
+        bttnrefresh.setBorder(new com.formdev.flatlaf.ui.FlatButtonBorder());
+        bttnrefresh.setBorderPainted(false);
         bttnrefresh.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        bttnrefresh.setMargin(new java.awt.Insets(3, 14, 3, 14));
         bttnrefresh.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 bttnrefreshActionPerformed(evt);
             }
         });
-        add(bttnrefresh, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 20, 30, 30));
+        add(bttnrefresh, new org.netbeans.lib.awtextra.AbsoluteConstraints(520, 20, 30, 30));
 
         jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { " ", "Fiction", "Non-Fiction" }));
         jComboBox1.addContainerListener(new java.awt.event.ContainerAdapter() {
@@ -146,12 +152,26 @@ public class pnlrecords extends javax.swing.JPanel {
                 jComboBox1ComponentRemoved(evt);
             }
         });
-        add(jComboBox1, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 30, 130, -1));
+        add(jComboBox1, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 30, 130, -1));
 
         jLabel19.setFont(new java.awt.Font("Century Gothic", 0, 12)); // NOI18N
         jLabel19.setForeground(java.awt.Color.white);
         jLabel19.setText("Search Title");
         add(jLabel19, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 10, 370, -1));
+
+        bttnclear.setBackground(new java.awt.Color(165, 36, 34));
+        bttnclear.setIcon(new javax.swing.ImageIcon(getClass().getResource("/assets/clear.png"))); // NOI18N
+        bttnclear.setToolTipText("Clear Filters");
+        bttnclear.setBorder(new com.formdev.flatlaf.ui.FlatButtonBorder());
+        bttnclear.setBorderPainted(false);
+        bttnclear.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        bttnclear.setMargin(new java.awt.Insets(3, 14, 3, 14));
+        bttnclear.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                bttnclearActionPerformed(evt);
+            }
+        });
+        add(bttnclear, new org.netbeans.lib.awtextra.AbsoluteConstraints(560, 20, 30, 30));
     }// </editor-fold>//GEN-END:initComponents
 
     private void bttncheckoutActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bttncheckoutActionPerformed
@@ -163,7 +183,6 @@ public class pnlrecords extends javax.swing.JPanel {
             REUSABLES.arrBook.add(jTable2.getValueAt(i, 2).toString());
             REUSABLES.arrIsbn.add(jTable2.getValueAt(i, 1).toString());
         }
-        
         this.setVisible(false);
         new frmcheckout().setVisible(true);
     }//GEN-LAST:event_bttncheckoutActionPerformed
@@ -215,6 +234,11 @@ public class pnlrecords extends javax.swing.JPanel {
     private void jComboBox1ComponentRemoved(java.awt.event.ContainerEvent evt) {//GEN-FIRST:event_jComboBox1ComponentRemoved
         // TODO add your handling code here:
     }//GEN-LAST:event_jComboBox1ComponentRemoved
+
+    private void bttnclearActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bttnclearActionPerformed
+       jTextField1.setText(null);
+       jComboBox1.setSelectedIndex(0);
+    }//GEN-LAST:event_bttnclearActionPerformed
 
    
     private void clearTable() {
@@ -364,6 +388,7 @@ public class WrapTextRenderer extends DefaultTableCellRenderer {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton bttncheckout;
+    private javax.swing.JButton bttnclear;
     private javax.swing.JButton bttnrefresh;
     private javax.swing.JButton bttnsearh;
     private com.formdev.flatlaf.ui.FlatMenuBarUI flatMenuBarUI1;

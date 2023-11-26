@@ -120,7 +120,7 @@ public class frmsignup extends javax.swing.JFrame {
     }//GEN-LAST:event_bttnclearActionPerformed
 
     private void jButton9bttnsignupActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton9bttnsignupActionPerformed
-       this.setVisible(false);
+       clear();this.setVisible(false);
        new frmlogin().setVisible(true);
     }//GEN-LAST:event_jButton9bttnsignupActionPerformed
     private void clear(){
@@ -136,7 +136,7 @@ public class frmsignup extends javax.swing.JFrame {
                 if (fpassword.getText().equals(fconfirmpassword.getText())) {
                     String sqlquery = "INSERT INTO tbl_accounts (username, password, name, email) VALUES ('" + fusername.getText()
                             + "', '" + fpassword.getText() + "', '" + fname.getText() + "', '" + femail.getText() + "')";
-                    DB.executeQuery(sqlquery);
+                    DB.executeUpdate(sqlquery);
                     REUSABLES.showNotif("Account Created! Proceeding to Login Form");
                     this.setVisible(false);
                     clear();   

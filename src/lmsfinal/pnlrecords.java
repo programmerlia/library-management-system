@@ -271,7 +271,6 @@ public class pnlrecords extends javax.swing.JPanel {
         jTable2.setCellSelectionEnabled(false);
         jTable2.setColumnSelectionAllowed(false);
         jTable2.setRowSelectionAllowed(true);
-        //jTable2.setSelectionMode(ListSelectionModel.MULTIPLE_INTERVAL_SELECTION);
         jTable2.setSelectionModel(new listselectionmodel());
         for (int i = 1; i < jTable2.getColumnCount(); i++) {
             jTable2.getColumnModel().getColumn(i).setCellRenderer(new WrapTextRenderer());

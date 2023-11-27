@@ -6,6 +6,7 @@ import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 import java.util.concurrent.TimeUnit;
+import java.util.Date; 
 import javax.swing.UIManager;
 import javax.swing.UnsupportedLookAndFeelException;
 import javax.swing.table.DefaultTableModel;
@@ -56,7 +57,7 @@ public class frmcheckout extends javax.swing.JFrame{
         REUSABLES.arrIsbn.clear();
         listBook.setModel(REUSABLES.modelBook);
         cmbQuant.setSelectedItem("1");
-        txtBorName.setText("");
+        txtBorName.setText(null);
         jDateChooser1.setDate(null);
         jDateChooser2.setDate(null);
         jDateChooser3.setDate(null);
@@ -399,44 +400,48 @@ public class frmcheckout extends javax.swing.JFrame{
     
     private void bttngenerateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bttngenerateActionPerformed
         try {
+            Date date1 = jDateChooser1.getDate();
+            Date date2 = jDateChooser2.getDate();
+            Date date3 = jDateChooser3.getDate();
+
             if (REUSABLES.checkNotNull(jDateChooser1.getDate(), jDateChooser2.getDate(), jDateChooser3.getDate(), cmbQuant.getSelectedItem(), txtBorName.getText())) {
-                java.util.Date date1 = jDateChooser1.getDate();
-                java.util.Date date2 = jDateChooser2.getDate();
-                java.util.Date date3 = jDateChooser3.getDate();
+                if(jDateChooser2.getDate().compareTo(jDateChooser1.getDate())>0 || jDateChooser3.getDate().compareTo(jDateChooser1.getDate())>0){
+                    lblRecBorName.setVisible(true);
+                    lblDayHand.setVisible(true);
+                    lblDayOver.setVisible(true);
+                    lblServFee.setVisible(true);
+                    lblBookFee.setVisible(true);
+                    lblOverFee.setVisible(true);
+                    lblTotalFee.setVisible(true);
 
-                lblRecBorName.setVisible(true);
-                lblDayHand.setVisible(true);
-                lblDayOver.setVisible(true);
-                lblServFee.setVisible(true);
-                lblBookFee.setVisible(true);
-                lblOverFee.setVisible(true);
-                lblTotalFee.setVisible(true);
+                    lblRecBorName.setText(txtBorName.getText());
+                    lblDayHand.setText(Long.toString(TimeUnit.DAYS.convert(date3.getTime() - date1.getTime(), TimeUnit.MILLISECONDS)));
+                    lblDayOver.setText(Long.toString(TimeUnit.DAYS.convert(date3.getTime() - date2.getTime(), TimeUnit.MILLISECONDS)));
 
-                lblRecBorName.setText(txtBorName.getText());
-                lblDayHand.setText(Long.toString(TimeUnit.DAYS.convert(date3.getTime() - date1.getTime(), TimeUnit.MILLISECONDS)));
-                lblDayOver.setText(Long.toString(TimeUnit.DAYS.convert(date3.getTime() - date2.getTime(), TimeUnit.MILLISECONDS)));
+                    if (Integer.parseInt(lblDayOver.getText()) < 0) {
+                        lblDayOver.setText("0");
+                    }
 
-                if (Integer.parseInt(lblDayOver.getText()) < 0) {
-                    lblDayOver.setText("0");
+                    ArrayList<Integer> arrQuant = new ArrayList<>(REUSABLES.arrBook.size());
+
+                    double bookFee = 0;
+                    for (int i = 0; i < REUSABLES.arrBook.size(); i++) {
+                        bookFee += 40 * Integer.valueOf((String) tblRec.getValueAt(i, 2));
+                    }
+
+                    double servFee = 5;
+                    double overFee = bookFee * Integer.parseInt(lblDayOver.getText()) * 0.5;
+                    double totalFee = servFee + bookFee + overFee;
+
+                    lblServFee.setText("P" + Double.toString(servFee));
+                    lblBookFee.setText("P" + Double.toString(bookFee));
+                    lblOverFee.setText("P" + Double.toString(overFee));
+                    lblTotalFee.setText("P" + Double.toString(totalFee));
+
+                    bttnsave.setVisible(true);
+                } else{
+                    Notification.show("Invalid date!");
                 }
-
-                ArrayList<Integer> arrQuant = new ArrayList<>(REUSABLES.arrBook.size());
-
-                double bookFee = 0;
-                for (int i = 0; i < REUSABLES.arrBook.size(); i++) {
-                    bookFee += 40 * Integer.valueOf((String) tblRec.getValueAt(i, 2));
-                }
-
-                double servFee = 5;
-                double overFee = bookFee * Integer.parseInt(lblDayOver.getText()) * 0.5;
-                double totalFee = servFee + bookFee + overFee;
-
-                lblServFee.setText("P" + Double.toString(servFee));
-                lblBookFee.setText("P" + Double.toString(bookFee));
-                lblOverFee.setText("P" + Double.toString(overFee));
-                lblTotalFee.setText("P" + Double.toString(totalFee));
-
-                bttnsave.setVisible(true);
             } else {
                 Notification.show("Please Fill all Fields!");
             }

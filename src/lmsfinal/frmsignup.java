@@ -3,6 +3,8 @@ package lmsfinal;
 import com.formdev.flatlaf.FlatLightLaf;
 import java.sql.SQLException;
 import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import javax.swing.JOptionPane;
 import static javax.swing.JOptionPane.showMessageDialog;
 import javax.swing.SwingUtilities;
@@ -72,6 +74,7 @@ public class frmsignup extends javax.swing.JFrame {
         jButton7.setText("CLEAR");
         jButton7.setBorder(null);
         jButton7.setBorderPainted(false);
+        jButton7.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         jButton7.setVerifyInputWhenFocusTarget(false);
         jButton7.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -86,6 +89,7 @@ public class frmsignup extends javax.swing.JFrame {
         jButton8.setText("SIGNUP");
         jButton8.setBorder(null);
         jButton8.setBorderPainted(false);
+        jButton8.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         jButton8.setVerifyInputWhenFocusTarget(false);
         jButton8.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -100,6 +104,7 @@ public class frmsignup extends javax.swing.JFrame {
         jButton9.setIcon(new javax.swing.ImageIcon(getClass().getResource("/assets/i-left.png"))); // NOI18N
         jButton9.setBorder(null);
         jButton9.setBorderPainted(false);
+        jButton9.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         jButton9.setVerifyInputWhenFocusTarget(false);
         jButton9.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -131,27 +136,35 @@ public class frmsignup extends javax.swing.JFrame {
       fusername.setText(null);
     }
     private void bttnsignupActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bttnsignupActionPerformed
-        try {
-            if (REUSABLES.checkNotNull(fusername.getText(), fpassword.getText(), fname.getText(), femail.getText(), fconfirmpassword.getText())) {
-                if (fpassword.getText().equals(fconfirmpassword.getText())) {
-                    String sqlquery = "INSERT INTO tbl_accounts (username, password, name, email) VALUES ('" + fusername.getText()
-                            + "', '" + fpassword.getText() + "', '" + fname.getText() + "', '" + femail.getText() + "')";
-                    DB.executeUpdate(sqlquery);
-                    Notification.show("Account Created! Proceeding to Login Form");
-                    this.setVisible(false);
-                    clear();   
-                    
-                    new frmlogin().setVisible(true);
-                } else {
-                    Notification.show("Passwords do not match");
+        String sqlquery = "INSERT INTO tbl_accounts (username, password, name, email) VALUES (?,?,?,?)";
+        if (!fusername.getText().isEmpty() && !fpassword.getText().isEmpty() && !fname.getText().isEmpty() && !femail.getText().isEmpty() && !fconfirmpassword.getText().isEmpty()) {
+    if (fpassword.getText().equals(fconfirmpassword.getText())) {
+                try (Connection con = DB.open(); PreparedStatement preparedStatement = con.prepareStatement(sqlquery)) {
+
+                    preparedStatement.setString(1, fusername.getText());
+                    preparedStatement.setString(2, fpassword.getText());
+                    preparedStatement.setString(3, fname.getText());
+                    preparedStatement.setString(4, femail.getText());
+                          int rowsAffected = preparedStatement.executeUpdate();
+                     if (rowsAffected  > 0) {
+                            Notification.show("Account Created! Proceeding to Login Form");
+                            this.setVisible(false);
+                            clear();
+
+                            new frmlogin().setVisible(true);
+                        }
+                
+                } catch (Exception ex) {
+                    ex.printStackTrace();
                 }
+
             } else {
-                Notification.show("Answer All Fields");
+                Notification.show("Passwords do not match");
             }
-        } catch (Exception e) {
-            e.printStackTrace();
-            Notification.show("An error occurred. Please try again later.");
+        } else {
+            Notification.show("Answer All Fields");
         }
+
     }//GEN-LAST:event_bttnsignupActionPerformed
    
     /**

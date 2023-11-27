@@ -138,6 +138,7 @@ public class frmmain extends javax.swing.JFrame {
         bttnrecords.setText("RECORDS");
         bttnrecords.setToolTipText("");
         bttnrecords.setBorder(new EmptyBorder (0, 20, 0, 0));
+        bttnrecords.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         bttnrecords.setIconTextGap(20);
         bttnrecords.setOpaque(true);
         bttnrecords.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -153,6 +154,7 @@ public class frmmain extends javax.swing.JFrame {
         bttnaccount.setText("ACCOUNT");
         bttnaccount.setToolTipText("");
         bttnaccount.setBorder(new EmptyBorder (0, 20, 0, 0));
+        bttnaccount.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         bttnaccount.setIconTextGap(20);
         bttnaccount.setOpaque(true);
         bttnaccount.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -168,6 +170,7 @@ public class frmmain extends javax.swing.JFrame {
         bttnupdate.setText("UPDATE");
         bttnupdate.setToolTipText("");
         bttnupdate.setBorder(new EmptyBorder (0, 20, 0, 0));
+        bttnupdate.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         bttnupdate.setIconTextGap(20);
         bttnupdate.setOpaque(true);
         bttnupdate.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -183,6 +186,7 @@ public class frmmain extends javax.swing.JFrame {
         bttnhome.setText("HOME");
         bttnhome.setToolTipText("");
         bttnhome.setBorder(new EmptyBorder (0, 20, 0, 0));
+        bttnhome.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         bttnhome.setIconTextGap(20);
         bttnhome.setOpaque(true);
         bttnhome.addMouseListener(new java.awt.event.MouseAdapter() {

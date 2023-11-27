@@ -58,6 +58,7 @@ public class frmlogin extends javax.swing.JFrame {
         bttnclear.setText("CLEAR");
         bttnclear.setBorder(null);
         bttnclear.setBorderPainted(false);
+        bttnclear.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         bttnclear.setVerifyInputWhenFocusTarget(false);
         bttnclear.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -69,9 +70,10 @@ public class frmlogin extends javax.swing.JFrame {
         bttnsignup.setFont(new java.awt.Font("Century Gothic", 1, 8)); // NOI18N
         bttnsignup.setForeground(new java.awt.Color(0, 0, 153));
         bttnsignup.setText("Click here to Create Account");
-        bttnsignup.setBorder(null);
+        bttnsignup.setBorder(new com.formdev.flatlaf.ui.FlatTextBorder());
         bttnsignup.setBorderPainted(false);
         bttnsignup.setContentAreaFilled(false);
+        bttnsignup.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         bttnsignup.setVerifyInputWhenFocusTarget(false);
         bttnsignup.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -94,6 +96,7 @@ public class frmlogin extends javax.swing.JFrame {
         bttnlogin.setText("LOGIN");
         bttnlogin.setBorder(null);
         bttnlogin.setBorderPainted(false);
+        bttnlogin.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         bttnlogin.setVerifyInputWhenFocusTarget(false);
         bttnlogin.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -103,6 +106,7 @@ public class frmlogin extends javax.swing.JFrame {
         getContentPane().add(bttnlogin, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 360, 110, 40));
 
         showPass.setIcon(new javax.swing.ImageIcon(getClass().getResource("/assets/picture eye.png"))); // NOI18N
+        showPass.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         showPass.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mousePressed(java.awt.event.MouseEvent evt) {
                 showPassMousePressed(evt);

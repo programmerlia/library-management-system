@@ -446,7 +446,10 @@ public class frmcheckout extends javax.swing.JFrame{
     }//GEN-LAST:event_bttngenerateActionPerformed
 
     private void cmbQuantActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbQuantActionPerformed
-        tblRec.setValueAt(cmbQuant.getSelectedItem(), listBook.getSelectedIndex(), 2);
+        try{
+            tblRec.setValueAt(cmbQuant.getSelectedItem(), listBook.getSelectedIndex(), 2);
+        } catch(Exception e){
+        }
     }//GEN-LAST:event_cmbQuantActionPerformed
 
     private void listBookMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_listBookMouseClicked

@@ -20,10 +20,10 @@ import javax.swing.filechooser.FileNameExtensionFilter;
 public class frmcheckout extends javax.swing.JFrame{
 
 
-    public frmcheckout() {
-        
+    public frmcheckout() {        
         setVisible(false);
         initComponents();
+
         
         setResizable(false);
         this.setLocationRelativeTo(null);
@@ -404,8 +404,8 @@ public class frmcheckout extends javax.swing.JFrame{
             Date date2 = jDateChooser2.getDate();
             Date date3 = jDateChooser3.getDate();
 
-            if (REUSABLES.checkNotNull(jDateChooser1.getDate(), jDateChooser2.getDate(), jDateChooser3.getDate(), cmbQuant.getSelectedItem(), txtBorName.getText())) {
-                if(jDateChooser2.getDate().compareTo(jDateChooser1.getDate())>0 || jDateChooser3.getDate().compareTo(jDateChooser1.getDate())>0){
+            if (!REUSABLES.checkNotNull(jDateChooser1.getDate(), jDateChooser2.getDate(), jDateChooser3.getDate(), cmbQuant.getSelectedItem(), txtBorName.getText())) {
+                if(!(date2.compareTo(date1)<0 || date3.compareTo(date1)<0)){
                     lblRecBorName.setVisible(true);
                     lblDayHand.setVisible(true);
                     lblDayOver.setVisible(true);
@@ -439,6 +439,7 @@ public class frmcheckout extends javax.swing.JFrame{
                     lblTotalFee.setText("P" + Double.toString(totalFee));
 
                     bttnsave.setVisible(true);
+                    
                 } else{
                     Notification.show("Invalid date!");
                 }

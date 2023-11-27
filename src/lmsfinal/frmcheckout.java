@@ -404,45 +404,45 @@ public class frmcheckout extends javax.swing.JFrame{
             Date date2 = jDateChooser2.getDate();
             Date date3 = jDateChooser3.getDate();
 
-            if (!REUSABLES.checkNotNull(jDateChooser1.getDate(), jDateChooser2.getDate(), jDateChooser3.getDate(), cmbQuant.getSelectedItem(), txtBorName.getText())) {
-                if(!(date2.compareTo(date1)<0 || date3.compareTo(date1)<0)){
-                    lblRecBorName.setVisible(true);
-                    lblDayHand.setVisible(true);
-                    lblDayOver.setVisible(true);
-                    lblServFee.setVisible(true);
-                    lblBookFee.setVisible(true);
-                    lblOverFee.setVisible(true);
-                    lblTotalFee.setVisible(true);
+            if (REUSABLES.checkNotNull(jDateChooser1.getDate(), jDateChooser2.getDate(), jDateChooser3.getDate(), cmbQuant.getSelectedItem(), txtBorName.getText())) {
+                    if(!(date2.compareTo(date1)<0 || date3.compareTo(date1)<0)){
+                        lblRecBorName.setVisible(true);
+                        lblDayHand.setVisible(true);
+                        lblDayOver.setVisible(true);
+                        lblServFee.setVisible(true);
+                        lblBookFee.setVisible(true);
+                        lblOverFee.setVisible(true);
+                        lblTotalFee.setVisible(true);
 
-                    lblRecBorName.setText(txtBorName.getText());
-                    lblDayHand.setText(Long.toString(TimeUnit.DAYS.convert(date3.getTime() - date1.getTime(), TimeUnit.MILLISECONDS)));
-                    lblDayOver.setText(Long.toString(TimeUnit.DAYS.convert(date3.getTime() - date2.getTime(), TimeUnit.MILLISECONDS)));
+                        lblRecBorName.setText(txtBorName.getText());
+                        lblDayHand.setText(Long.toString(TimeUnit.DAYS.convert(date3.getTime() - date1.getTime(), TimeUnit.MILLISECONDS)));
+                        lblDayOver.setText(Long.toString(TimeUnit.DAYS.convert(date3.getTime() - date2.getTime(), TimeUnit.MILLISECONDS)));
 
-                    if (Integer.parseInt(lblDayOver.getText()) < 0) {
-                        lblDayOver.setText("0");
+                        if (Integer.parseInt(lblDayOver.getText()) < 0) {
+                            lblDayOver.setText("0");
+                        }
+
+                        ArrayList<Integer> arrQuant = new ArrayList<>(REUSABLES.arrBook.size());
+
+                        double bookFee = 0;
+                        for (int i = 0; i < REUSABLES.arrBook.size(); i++) {
+                            bookFee += 40 * Integer.valueOf((String) tblRec.getValueAt(i, 2));
+                        }
+
+                        double servFee = 5;
+                        double overFee = bookFee * Integer.parseInt(lblDayOver.getText()) * 0.5;
+                        double totalFee = servFee + bookFee + overFee;
+
+                        lblServFee.setText("P" + Double.toString(servFee));
+                        lblBookFee.setText("P" + Double.toString(bookFee));
+                        lblOverFee.setText("P" + Double.toString(overFee));
+                        lblTotalFee.setText("P" + Double.toString(totalFee));
+
+                        bttnsave.setVisible(true);
+
+                    } else{
+                        Notification.show("Invalid date!");
                     }
-
-                    ArrayList<Integer> arrQuant = new ArrayList<>(REUSABLES.arrBook.size());
-
-                    double bookFee = 0;
-                    for (int i = 0; i < REUSABLES.arrBook.size(); i++) {
-                        bookFee += 40 * Integer.valueOf((String) tblRec.getValueAt(i, 2));
-                    }
-
-                    double servFee = 5;
-                    double overFee = bookFee * Integer.parseInt(lblDayOver.getText()) * 0.5;
-                    double totalFee = servFee + bookFee + overFee;
-
-                    lblServFee.setText("P" + Double.toString(servFee));
-                    lblBookFee.setText("P" + Double.toString(bookFee));
-                    lblOverFee.setText("P" + Double.toString(overFee));
-                    lblTotalFee.setText("P" + Double.toString(totalFee));
-
-                    bttnsave.setVisible(true);
-                    
-                } else{
-                    Notification.show("Invalid date!");
-                }
             } else {
                 Notification.show("Please Fill all Fields!");
             }

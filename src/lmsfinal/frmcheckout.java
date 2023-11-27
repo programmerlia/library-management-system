@@ -50,8 +50,8 @@ public class frmcheckout extends javax.swing.JFrame{
 
     
     private void clear() {
-        REUSABLES.modelBook = new DefaultListModel();
-        REUSABLES.modelIsbn = new DefaultListModel();
+        REUSABLES.modelBook.clear();
+        REUSABLES.modelIsbn.clear();
         REUSABLES.arrBook.clear();
         REUSABLES.arrIsbn.clear();
         listBook.setModel(REUSABLES.modelBook);
@@ -459,6 +459,7 @@ public class frmcheckout extends javax.swing.JFrame{
 
     private void bttnclearActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bttnclearActionPerformed
       this.setVisible(false);
+      clear();
       
     }//GEN-LAST:event_bttnclearActionPerformed
 

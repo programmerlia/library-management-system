@@ -149,14 +149,14 @@ public class frmlogin extends javax.swing.JFrame {
 
             try (ResultSet rs = preparedStatement.executeQuery()) {
                 if (rs.next()) {
-                    REUSABLES.showNotif("Login Succesful");
+                    Notification.show("Login Succesful");
                     GV.MAINUSERNAME = enteredUsername;
                     GV.MAINPASSWORD = enteredPassword;
                     this.setVisible(false);
                     new frmmain().setVisible(true);
                     
                 } else {
-                    REUSABLES.showNotif("Invalid username or password!");
+                    Notification.show("Invalid username or password!");
                 }
             }
         } catch (SQLException e) {

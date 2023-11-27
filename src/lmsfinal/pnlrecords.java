@@ -176,7 +176,6 @@ public class pnlrecords extends javax.swing.JPanel {
 
     private void bttncheckoutActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bttncheckoutActionPerformed
         
-        
         for (int i : jTable2.getSelectedRows()){
             REUSABLES.modelBook.addElement(jTable2.getValueAt(i, 2));
             REUSABLES.modelIsbn.addElement(jTable2.getValueAt(i, 1));
@@ -219,6 +218,8 @@ public class pnlrecords extends javax.swing.JPanel {
         
         if (!jTable2.getSelectionModel().isSelectionEmpty()){
             bttncheckout.setEnabled(true);
+        } else{
+            bttncheckout.setEnabled(false);
         }
         
         

@@ -40,7 +40,7 @@ public class frmcheckout extends javax.swing.JFrame{
         bttnsave.setVisible(false);
     
         
-        
+        tblRec.getTableHeader().setReorderingAllowed(false);
         tblRec.setModel(tableModell);
         
         for (int i=0; i<REUSABLES.arrBook.size();i++)  {
@@ -207,6 +207,8 @@ public class frmcheckout extends javax.swing.JFrame{
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
+        tblRec.setEnabled(false);
+        tblRec.setShowGrid(false);
         jScrollPane1.setViewportView(tblRec);
 
         pnlprint.add(jScrollPane1);
@@ -317,7 +319,6 @@ public class frmcheckout extends javax.swing.JFrame{
         jPanel1.add(pnlprint, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 70, 310, 330));
 
         bttngenerate.setBackground(new java.awt.Color(255, 201, 121));
-        bttngenerate.setForeground(new java.awt.Color(0, 0, 0));
         bttngenerate.setText("Generate Receipt");
         bttngenerate.setToolTipText("");
         bttngenerate.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
@@ -354,7 +355,6 @@ public class frmcheckout extends javax.swing.JFrame{
         jPanel1.add(jLabel31, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 100, 50, -1));
 
         bttnclear.setBackground(new java.awt.Color(255, 201, 121));
-        bttnclear.setForeground(new java.awt.Color(0, 0, 0));
         bttnclear.setText("Cancel");
         bttnclear.setToolTipText("");
         bttnclear.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
@@ -366,7 +366,6 @@ public class frmcheckout extends javax.swing.JFrame{
         jPanel1.add(bttnclear, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 380, -1, -1));
 
         bttnsave.setBackground(new java.awt.Color(255, 201, 121));
-        bttnsave.setForeground(new java.awt.Color(0, 0, 0));
         bttnsave.setText("Download");
         bttnsave.setToolTipText("");
         bttnsave.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));

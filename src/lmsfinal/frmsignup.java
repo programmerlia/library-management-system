@@ -137,20 +137,20 @@ public class frmsignup extends javax.swing.JFrame {
                     String sqlquery = "INSERT INTO tbl_accounts (username, password, name, email) VALUES ('" + fusername.getText()
                             + "', '" + fpassword.getText() + "', '" + fname.getText() + "', '" + femail.getText() + "')";
                     DB.executeUpdate(sqlquery);
-                    REUSABLES.showNotif("Account Created! Proceeding to Login Form");
+                    Notification.show("Account Created! Proceeding to Login Form");
                     this.setVisible(false);
                     clear();   
                     
                     new frmlogin().setVisible(true);
                 } else {
-                    REUSABLES.showNotif("Passwords do not match");
+                    Notification.show("Passwords do not match");
                 }
             } else {
-                REUSABLES.showNotif("Answer All Fields");
+                Notification.show("Answer All Fields");
             }
         } catch (Exception e) {
             e.printStackTrace();
-            REUSABLES.showNotif("An error occurred. Please try again later.");
+            Notification.show("An error occurred. Please try again later.");
         }
     }//GEN-LAST:event_bttnsignupActionPerformed
    

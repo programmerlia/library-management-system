@@ -261,7 +261,7 @@ public class pnlaccount extends javax.swing.JPanel {
                 String qry = "UPDATE tbl_accounts SET username = '" + ffield1.getText()
                         + "' WHERE username = '" + GV.MAINUSERNAME + "'";
                 DB.executeQuery(qry);
-                 REUSABLES.showNotif("Account updated successfully!");
+                 Notification.show("Account updated successfully!");
                  GV.MAINUSERNAME = ffield1.getText();
                  clear();
                  pnlchange.setVisible(false);
@@ -269,7 +269,7 @@ public class pnlaccount extends javax.swing.JPanel {
                  
             }
             else{
-                REUSABLES.showNotif("Answer all Fields");
+                Notification.show("Answer all Fields");
             }
         }
      
@@ -277,7 +277,7 @@ public class pnlaccount extends javax.swing.JPanel {
              if (REUSABLES.checkNotNull(ffield1.getText(), ffield2.getText())) {
                 String qry = "UPDATE tbl_accounts SET password = '" + ffield2.getText() + "' WHERE username = '" + GV.MAINUSERNAME + "'";
                 DB.executeQuery(qry);
-                 REUSABLES.showNotif("Account updated successfully!");
+                 Notification.show("Account updated successfully!");
                 GV.MAINPASSWORD = ffield1.getText();
                   clear();
                  pnlchange.setVisible(false);
@@ -285,11 +285,11 @@ public class pnlaccount extends javax.swing.JPanel {
 
             }
             else{
-                REUSABLES.showNotif("Answer all Fields");
+                Notification.show("Answer all Fields");
             }
         }
       }else{
-          REUSABLES.showNotif("INPUT DOES NOT MATCH!");
+          Notification.show("INPUT DOES NOT MATCH!");
       }
       
       

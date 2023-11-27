@@ -438,7 +438,7 @@ public class frmcheckout extends javax.swing.JFrame{
 
                 bttnsave.setVisible(true);
             } else {
-                REUSABLES.showNotif("Please Fill all Fields!");
+                Notification.show("Please Fill all Fields!");
             }
         } catch (Exception e) {
         }

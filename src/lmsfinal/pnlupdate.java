@@ -446,7 +446,7 @@ public class pnlupdate extends javax.swing.JPanel {
                insertBook(fisbn.getText(), ftitle.getText(), fauthor.getText(), dateString);
            }
         }else{
-           REUSABLES.showNotif("Fill all Text/Date Fields");
+           Notification.show("Fill all Text/Date Fields");
     }
        
         clear();pfiction.setVisible(false);
@@ -483,11 +483,11 @@ public class pnlupdate extends javax.swing.JPanel {
             int rowsAffected = preparedStatement.executeUpdate();
 
             if (rowsAffected > 0) {
-                REUSABLES.showNotif("Book inserted successfully!");
+                Notification.show("Book inserted successfully!");
                 clear();
                 
             } else {
-                  REUSABLES.showNotif("Failed to insert book.");
+                  Notification.show("Failed to insert book.");
             }
 
         } catch (SQLException e) {
@@ -526,10 +526,10 @@ public class pnlupdate extends javax.swing.JPanel {
             int rowsAffected = preparedStatement.executeUpdate();
 
             if (rowsAffected > 0) {
-                REUSABLES.showNotif("Book inserted successfully!");
+                Notification.show("Book inserted successfully!");
                 clear();
             } else {
-                REUSABLES.showNotif("Failed to insert book.");
+                Notification.show("Failed to insert book.");
             }
 
         } catch (SQLException e) {
@@ -589,7 +589,7 @@ public class pnlupdate extends javax.swing.JPanel {
                 imageBytes = new byte[(int) selectedFile.length()];
                 fis.read(imageBytes);
                 fis.close();
-                REUSABLES.showNotif("File Uploaded");
+                Notification.show("File Uploaded");
                 displayImage();
 
         } catch (IOException e) {

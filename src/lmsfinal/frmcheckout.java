@@ -23,11 +23,10 @@ public class frmcheckout extends javax.swing.JFrame{
     public frmcheckout() {        
         setVisible(false);
         initComponents();
-
-        
+      
         setResizable(false);
         this.setLocationRelativeTo(null);
-        
+        txtBorName.setText(null);
         listBook.setModel(REUSABLES.modelBook);
         listBook.setSelectedIndex(0);
         
@@ -403,7 +402,8 @@ public class frmcheckout extends javax.swing.JFrame{
             Date date1 = jDateChooser1.getDate();
             Date date2 = jDateChooser2.getDate();
             Date date3 = jDateChooser3.getDate();
-
+            
+            if (txtBorName.getText() ==null){
             if (REUSABLES.checkNotNull(jDateChooser1.getDate(), jDateChooser2.getDate(), jDateChooser3.getDate(), cmbQuant.getSelectedItem(), txtBorName.getText())) {
                     if(!(date2.compareTo(date1)<0 || date3.compareTo(date1)<0)){
                         lblRecBorName.setVisible(true);
@@ -446,6 +446,8 @@ public class frmcheckout extends javax.swing.JFrame{
             } else {
                 Notification.show("Please Fill all Fields!");
             }
+            }else{ Notification.show("Fill all Fields");}
+            
         } catch (Exception e) {
         }
 

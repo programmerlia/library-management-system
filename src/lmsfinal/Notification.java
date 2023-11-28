@@ -19,7 +19,7 @@ public class Notification {
         label.setBorder(BorderFactory.createEmptyBorder(0, 10, 0, 0));
         label.setFont(new Font("Century Gothic", Font.BOLD, 16));
         label.setForeground(Color.BLACK);
-        label.setBackground(Color.WHITE);
+        label.setBackground(Color.BLACK);
         frame.add(label, BorderLayout.WEST);
 
         frame.setVisible(true);

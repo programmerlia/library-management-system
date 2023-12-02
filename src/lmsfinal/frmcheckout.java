@@ -26,9 +26,13 @@ public class frmcheckout extends javax.swing.JFrame{
       
         setResizable(false);
         this.setLocationRelativeTo(null);
-        txtBorName.setText(null);
+        txtBorName.setText("");
         listBook.setModel(REUSABLES.modelBook);
         listBook.setSelectedIndex(0);
+        
+        jDateChooser1.setDate(new Date());
+        jDateChooser2.setDate(new Date());
+        jDateChooser3.setDate(new Date());
         
         lblRecBorName.setVisible(false);
         lblDayHand.setVisible(false);
@@ -50,16 +54,18 @@ public class frmcheckout extends javax.swing.JFrame{
 
     
     private void clear() {
+        
+        
         REUSABLES.modelBook.clear();
         REUSABLES.modelIsbn.clear();
         REUSABLES.arrBook.clear();
         REUSABLES.arrIsbn.clear();
         listBook.setModel(REUSABLES.modelBook);
         cmbQuant.setSelectedItem("1");
-        txtBorName.setText(null);
-        jDateChooser1.setDate(null);
-        jDateChooser2.setDate(null);
-        jDateChooser3.setDate(null);
+        txtBorName.setText("");
+        jDateChooser1.setDate(new Date());
+        jDateChooser2.setDate(new Date());
+        jDateChooser3.setDate(new Date());
         DefaultTableModel tableModel = new DefaultTableModel();
         tblRec.setModel(tableModel);
         lblRecBorName.setText(null);
@@ -397,15 +403,9 @@ public class frmcheckout extends javax.swing.JFrame{
     
     private DefaultTableModel  tableModell = new DefaultTableModel(new String[]{"Book Title", "ISBN", "Quantity"}, 0);
     
-    private void bttngenerateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bttngenerateActionPerformed
-        try {
-            Date date1 = jDateChooser1.getDate();
-            Date date2 = jDateChooser2.getDate();
-            Date date3 = jDateChooser3.getDate();
-            
-            if (txtBorName.getText() ==null){
-            if (REUSABLES.checkNotNull(jDateChooser1.getDate(), jDateChooser2.getDate(), jDateChooser3.getDate(), cmbQuant.getSelectedItem(), txtBorName.getText())) {
-                    if(!(date2.compareTo(date1)<0 || date3.compareTo(date1)<0)){
+    private void analyze(){
+                if(!(jDateChooser2.getDate().compareTo(jDateChooser1.getDate())<0 || jDateChooser3.getDate().compareTo(jDateChooser1.getDate())<0)){
+                        
                         lblRecBorName.setVisible(true);
                         lblDayHand.setVisible(true);
                         lblDayOver.setVisible(true);
@@ -415,8 +415,8 @@ public class frmcheckout extends javax.swing.JFrame{
                         lblTotalFee.setVisible(true);
 
                         lblRecBorName.setText(txtBorName.getText());
-                        lblDayHand.setText(Long.toString(TimeUnit.DAYS.convert(date3.getTime() - date1.getTime(), TimeUnit.MILLISECONDS)));
-                        lblDayOver.setText(Long.toString(TimeUnit.DAYS.convert(date3.getTime() - date2.getTime(), TimeUnit.MILLISECONDS)));
+                        lblDayHand.setText(Long.toString(TimeUnit.DAYS.convert(jDateChooser3.getDate().getTime() - jDateChooser1.getDate().getTime(), TimeUnit.MILLISECONDS)));
+                        lblDayOver.setText(Long.toString(TimeUnit.DAYS.convert(jDateChooser3.getDate().getTime() - jDateChooser2.getDate().getTime(), TimeUnit.MILLISECONDS)));
 
                         if (Integer.parseInt(lblDayOver.getText()) < 0) {
                             lblDayOver.setText("0");
@@ -443,13 +443,20 @@ public class frmcheckout extends javax.swing.JFrame{
                     } else{
                         Notification.show("Invalid date!");
                     }
-            } else {
-                Notification.show("Please Fill all Fields!");
-            }
-            }else{ Notification.show("Fill all Fields");}
+    }
+    
+    private void bttngenerateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bttngenerateActionPerformed
+        
             
-        } catch (Exception e) {
-        }
+            
+            if (txtBorName.getText().equals("")) {
+                Notification.show("Please Fill all Fields!");
+            } else {
+                analyze();
+            }
+
+            
+        
 
     }//GEN-LAST:event_bttngenerateActionPerformed
 

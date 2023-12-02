@@ -627,7 +627,7 @@ public class pnlupdate extends javax.swing.JPanel {
             cgenreList.append("Cooking, ");
         }
         if (c7.isSelected()) {
-           cgenreList.append("Religion, ");
+            cgenreList.append("Religion, ");
         }
         if (c8.isSelected()) {
             cgenreList.append("Life, ");
@@ -663,19 +663,19 @@ public class pnlupdate extends javax.swing.JPanel {
             cgenreList.append("Drama, ");
         }
         if (cc9.isSelected()) {
-            cgenreList.append("Science, ");
+            cgenreList.append("Science, "); 
         }
         if (cc10.isSelected()) {
             cgenreList.append("Supernatural, ");
         }
-       
+
         int length = cgenreList.length();
-    if (length >= 2) {
-        cgenreList.setLength(length - 2);
-        return cgenreList.toString();
-    } else {
-        return cgenreList.toString();
-    }
+        if (length >= 2) {
+            cgenreList.setLength(length - 2);
+            return cgenreList.toString();
+        } else {
+            return cgenreList.toString();
+        }
     }
     
 

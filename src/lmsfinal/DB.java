@@ -13,15 +13,12 @@ public class DB {
     private static final String USER = "root";
     private static final String PASSWORD = "";
 
-    // Private constructor to prevent instantiation
     private DB() {
     }
 
     public static Connection open() throws SQLException {
         return DriverManager.getConnection(JDBC_URL, USER, PASSWORD);
     }
-    
-    
 
     public static void close(Connection connection) {
         try {
@@ -34,42 +31,39 @@ public class DB {
     }
 
     public static void executeUpdate(String sql) {
-        try (Connection con = open();
-             Statement statement = con.createStatement()) {
-            
+        try (Connection con = open(); Statement statement = con.createStatement()) {
+
             statement.executeUpdate(sql);
 
         } catch (SQLException e) {
             handleSQLException(e);
         }
     }
-    
+
     public static ResultSet executeQuery(String sql, Object... params) {
-    try (Connection con = open();
-         PreparedStatement preparedStatement = con.prepareStatement(sql)) {
+        try (Connection con = open(); PreparedStatement preparedStatement = con.prepareStatement(sql)) {
 
-        for (int i = 0; i < params.length; i++) {
-            preparedStatement.setObject(i + 1, params[i]);
-        }
-
-                return preparedStatement.executeQuery();
-            } catch (SQLException e) {
-                handleSQLException(e);
-                return null;
+            for (int i = 0; i < params.length; i++) {
+                preparedStatement.setObject(i + 1, params[i]);
             }
-        }
-    
-       public static ResultSet executeQuery(String sql) {
-        try (Connection con = open();
-             PreparedStatement preparedStatement = con.prepareStatement(sql)) {
+
             return preparedStatement.executeQuery();
         } catch (SQLException e) {
             handleSQLException(e);
             return null;
         }
-}
+    }
+
+    public static ResultSet executeQuery(String sql) {
+        try (Connection con = open(); PreparedStatement preparedStatement = con.prepareStatement(sql)) {
+            return preparedStatement.executeQuery();
+        } catch (SQLException e) {
+            handleSQLException(e);
+            return null;
+        }
+    }
 
     public static void handleSQLException(SQLException e) {
-        e.printStackTrace(); 
+        e.printStackTrace();
     }
 }
